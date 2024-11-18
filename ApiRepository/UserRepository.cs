@@ -20,13 +20,22 @@ namespace ApiRepository
         public async Task<User> GetUserAsync(int userId)
         {
             DtoUser dtoUser = new DtoUser();
-            dtoUser = await db.Users.FirstOrDefaultAsync(x => x.Id == userId);
+            dtoUser = await db.Users.Include(x => x.UserInfo).Include(x => x.UserCredentials).FirstOrDefaultAsync(x => x.Id == userId);
             User user = new User
             {
                 Id = dtoUser.Id,
                 Driver = dtoUser.Driver,
                 UserCredentialsId = dtoUser.UserCredentialsId,
+                UserCredentials = new UserCredentials { Id = dtoUser.UserCredentials.Id, Password = dtoUser.UserCredentials.Password },
                 UserInfoId = dtoUser.UserInfoId,
+                UserInfo = new UserInfo
+                {
+                    Id = dtoUser.UserInfo.Id,
+                    Address = dtoUser.UserInfo.Address,
+                    Email = dtoUser.UserInfo.Email,
+                    Name = dtoUser.UserInfo.Name,
+                    Phone_number = dtoUser.UserInfo.Phone_number
+                },
                 OrderId = dtoUser.OrderId,
                 TruckTypeId = dtoUser.TruckTypeId,
                 RatingId = dtoUser.RatingId,
@@ -40,7 +49,16 @@ namespace ApiRepository
                 Id = user.Id,
                 Driver = user.Driver,
                 UserCredentialsId = user.UserCredentialsId,
+                UserCredentials = new DtoUserCredentials { Id = user.UserCredentials.Id, Password = user.UserCredentials.Password },
                 UserInfoId = user.UserInfoId,
+                UserInfo = new DtoUserInfo
+                {
+                    Id = user.UserInfo.Id,
+                    Address = user.UserInfo.Address,
+                    Email = user.UserInfo.Email,
+                    Name = user.UserInfo.Name,
+                    Phone_number = user.UserInfo.Phone_number
+                },
                 OrderId = user.OrderId,
                 TruckTypeId = user.TruckTypeId,
                 RatingId = user.RatingId
@@ -63,7 +81,16 @@ namespace ApiRepository
                 Id = user.Id,
                 Driver = user.Driver,
                 UserCredentialsId = user.UserCredentialsId,
+                UserCredentials = new DtoUserCredentials {Id = user.UserCredentials.Id, Password = user.UserCredentials.Password },
                 UserInfoId = user.UserInfoId,
+                UserInfo = new DtoUserInfo
+                {
+                    Id = user.UserInfo.Id,
+                    Address = user.UserInfo.Address,
+                    Email = user.UserInfo.Email,
+                    Name = user.UserInfo.Name,
+                    Phone_number = user.UserInfo.Phone_number
+                },
                 OrderId = user.OrderId,
                 TruckTypeId = user.TruckTypeId,
                 RatingId = user.RatingId

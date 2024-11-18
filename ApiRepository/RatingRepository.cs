@@ -42,6 +42,7 @@ namespace ApiRepository
                 Rating rating = new Rating
                 {
                     Id = dtoRating.Id,
+                    Ratings = dtoRating.Ratings,
                     Reason = dtoRating.Reason,
                     SenderId = dtoRating.SenderId,
                     ReceiverId = dtoRating.ReceiverId,
@@ -55,6 +56,7 @@ namespace ApiRepository
             DtoRating dtoRating = new DtoRating
             {
                 Id = rating.Id,
+                Ratings = rating.Ratings,
                 Reason = rating.Reason,
                 SenderId = rating.SenderId,
                 ReceiverId = rating.ReceiverId,

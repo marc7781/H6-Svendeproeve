@@ -11,12 +11,12 @@ namespace BackendModels
         public int Id { get; set; }
         public bool Driver {  get; set; }
         public int UserCredentialsId { get; set; }
-        public DtoUser_credentials User_Credentials { get; set; }
+        public DtoUserCredentials UserCredentials { get; set; }
         public int UserInfoId { get; set; }
-        public DtoUser_info User_Info { get; set; }
+        public DtoUserInfo UserInfo { get; set; }
         public int OrderId { get; set; }
-        public DtoOrder? Order { get; set; }
-        public int TruckTypeId { get; set; }
+        public List<DtoOrder>? Order { get; set; }
+        public int? TruckTypeId { get; set; }
         public DtoTruckType? TruckType { get; set; }
         public int RatingId { get; set; }
         public List<DtoRating>? Ratings { get; set; }

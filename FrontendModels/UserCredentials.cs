@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FrontendModels
 {
-    public class User_credentials
+    public class UserCredentials
     {
         public int Id { get; set; }
         public string Password { get; set; }

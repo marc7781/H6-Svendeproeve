@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiDBlayer.Migrations
 {
     [DbContext(typeof(Database))]
-    [Migration("20241114132643_initial")]
+    [Migration("20241118073120_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -137,6 +137,18 @@ namespace ApiDBlayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TruckTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Trucktype = "Lastbil"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Trucktype = "Varebil"
+                        });
                 });
 
             modelBuilder.Entity("DbModels.DtoUser", b =>
@@ -165,24 +177,41 @@ namespace ApiDBlayer.Migrations
                     b.Property<int>("UserInfoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("User_CredentialsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("User_InfoId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("TruckTypeId");
+                    b.HasIndex("TruckTypeId")
+                        .IsUnique();
 
-                    b.HasIndex("User_CredentialsId");
+                    b.HasIndex("UserCredentialsId");
 
-                    b.HasIndex("User_InfoId");
+                    b.HasIndex("UserInfoId");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Driver = true,
+                            OrderId = 0,
+                            RatingId = 0,
+                            TruckTypeId = 1,
+                            UserCredentialsId = 1,
+                            UserInfoId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Driver = false,
+                            OrderId = 0,
+                            RatingId = 0,
+                            TruckTypeId = 0,
+                            UserCredentialsId = 2,
+                            UserInfoId = 2
+                        });
                 });
 
-            modelBuilder.Entity("DbModels.DtoUser_credentials", b =>
+            modelBuilder.Entity("DbModels.DtoUserCredentials", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -197,9 +226,21 @@ namespace ApiDBlayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users_credentials");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Password = "$2a$12$F4AMp7JgfE05JlEhpkNZc./kr1LiR27Pm28O4M8mR9QrASYYnb1XO"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Password = "$2a$12$JaBadjoD5fqhKjI.Algi7.fAGmMxVdgzGOAWn8imtJ9E9m6dgcbBa"
+                        });
                 });
 
-            modelBuilder.Entity("DbModels.DtoUser_info", b =>
+            modelBuilder.Entity("DbModels.DtoUserInfo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -225,6 +266,24 @@ namespace ApiDBlayer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User_Infos");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Address = "Viborg",
+                            Email = "simon@gmail.com",
+                            Name = "Simon",
+                            Phone_number = 88888888
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Address = "Fjelstervang",
+                            Email = "marcus@gmail.com",
+                            Name = "Marcus",
+                            Phone_number = 12345678
+                        });
                 });
 
             modelBuilder.Entity("DbModels.DtoOrder", b =>
@@ -284,28 +343,33 @@ namespace ApiDBlayer.Migrations
             modelBuilder.Entity("DbModels.DtoUser", b =>
                 {
                     b.HasOne("DbModels.DtoTruckType", "TruckType")
-                        .WithMany()
-                        .HasForeignKey("TruckTypeId")
+                        .WithOne("User")
+                        .HasForeignKey("DbModels.DtoUser", "TruckTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DbModels.DtoUser_credentials", "User_Credentials")
+                    b.HasOne("DbModels.DtoUserCredentials", "UserCredentials")
                         .WithMany()
-                        .HasForeignKey("User_CredentialsId")
+                        .HasForeignKey("UserCredentialsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DbModels.DtoUser_info", "User_Info")
+                    b.HasOne("DbModels.DtoUserInfo", "UserInfo")
                         .WithMany()
-                        .HasForeignKey("User_InfoId")
+                        .HasForeignKey("UserInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("TruckType");
 
-                    b.Navigation("User_Credentials");
+                    b.Navigation("UserCredentials");
 
-                    b.Navigation("User_Info");
+                    b.Navigation("UserInfo");
+                });
+
+            modelBuilder.Entity("DbModels.DtoTruckType", b =>
+                {
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("DbModels.DtoUser", b =>

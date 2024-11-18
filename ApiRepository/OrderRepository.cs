@@ -20,6 +20,7 @@ namespace ApiRepository
             Order order = new Order
             {
                 Id = dtoOrder.Id,
+                Description = dtoOrder.Description,
                 Destination = dtoOrder.Destination,
                 Address = dtoOrder.Address,
                 Size = dtoOrder.Size,
@@ -42,6 +43,7 @@ namespace ApiRepository
                 Order order = new Order
                 {
                     Id = dtoOrder.Id,
+                    Description= dtoOrder.Description,
                     Destination = dtoOrder.Destination,
                     Address = dtoOrder.Address,
                     Size = dtoOrder.Size,
@@ -61,6 +63,7 @@ namespace ApiRepository
             DtoOrder dtoOrder = new DtoOrder
             {
                 Id= order.Id,
+                Description = order.Description,
                 Destination = order.Destination,
                 Address = order.Address,
                 Size = order.Size,

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DbModels
+namespace BackendModels
 {
-    public class DtoUser_credentials
+    public class DtoUserCredentials
     {
         public int Id { get; set; }
         public string Password { get; set; }

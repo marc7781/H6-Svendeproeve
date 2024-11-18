@@ -20,10 +20,10 @@ namespace DbModels
         public string ImageUrl { get; set; }
         public int OwnerId { get; set; }
         [NotMapped]
-        public DtoUser Owner { get; set; }
-        public int DriverId { get; set; }
-        public DtoUser Driver { get; set; }
+        public DtoUser? Owner { get; set; }
+        public int? DriverId { get; set; }
+        public DtoUser? Driver { get; set; }
         public int TruckTypeId { get; set; }
-        public DtoTruckType TruckType { get; set; }
+        public DtoTruckType? TruckType { get; set; }
     }
 }

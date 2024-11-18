@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BackendModels
+namespace FrontendModels
 {
-    public class DtoUser_info
+    public class UserInfo
     {
         public int Id { get; set; }
         public string Name { get; set; }

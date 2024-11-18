@@ -18,10 +18,10 @@ namespace FrontendModels
         public DateTime ExpirationDate { get; set; }
         public string ImageUrl { get; set; }
         public int OwnerId { get; set; }
-        public User Owner { get; set; }
-        public int DriverId { get; set; }
-        public User Driver { get; set; }
+        public User? Owner { get; set; }
+        public int? DriverId { get; set; }
+        public User? Driver { get; set; }
         public int TruckTypeId { get; set; }
-        public TruckType TruckType { get; set; }
+        public TruckType? TruckType { get; set; }
     }
 }

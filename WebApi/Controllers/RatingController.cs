@@ -1,4 +1,5 @@
 ﻿using FrontendModels;
+using ApiRepository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
@@ -9,10 +10,10 @@ namespace WebApi.Controllers
     [ApiController]
     public class RatingController : ControllerBase
     {
-        RatingController repo;
+        RatingRepository repo;
         public RatingController()
         {
-            repo = new RatingController();
+            repo = new RatingRepository();
         }
         [HttpGet("{ratingId}")]
         public async Task<IActionResult> GetRatingAsync(int ratingId)
