@@ -1,0 +1,26 @@
+﻿@page "/Login"
+@rendermode InteractiveServer
+<PageTitle>Log In</PageTitle>
+
+<div class="container">
+    <div class="header">
+        <h2 class="headeer-text">Velkommen, log in her</h2>
+    </div>
+    <div class="foreground">
+        @if (user != null)
+        {
+            <div class="input-container">
+                <h6 class="red-text">Din mail</h6>
+                <input type="text" class="input" @bind-value="user.UserInfo.Email" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Et kodeord</h6>
+                <input type="password" class="input" @bind-value="user.UserCredentials.Password" />
+            </div>
+        }
+        <div class="btn-container">
+            <button class="btn">Gå til sign up</button>
+            <button class="btn">Log in</button>
+        </div>
+    </div>
+</div>
