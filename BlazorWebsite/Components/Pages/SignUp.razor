@@ -1,0 +1,42 @@
+﻿@page "/Signup"
+@rendermode InteractiveServer
+<PageTitle>Sign Up</PageTitle>
+
+<div class="container">
+    <div class="header">
+        <h2 class="headeer-text">Opret en konto</h2>
+    </div>
+    <div class="foreground">
+        @if(user != null)
+        {
+            <div class="input-container">
+                <h6 class="red-text">Dit fulde navn</h6>
+                <input type="text" class="input" @bind-value="user.UserInfo.Name" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Din mail</h6>
+                <input type="text" class="input" @bind-value="user.UserInfo.Email" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Dit telefon nummer</h6>
+                <input type="number" class="input" @bind-value="user.UserInfo.Phone_number" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Din addresse</h6>
+                <input type="text" class="input" @bind-value="user.UserInfo.Address" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Et kodeord</h6>
+                <input type="password" class="input" @bind-value="password" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Gentag kodeorderet</h6>
+                <input type="password" class="input" @bind-value="repeatedPassword" />
+            </div>
+        }
+        <div class="btn-container">
+            <button class="btn">Gå til log in</button>
+            <button class="btn">Opret konto</button>
+        </div>
+    </div>
+</div>

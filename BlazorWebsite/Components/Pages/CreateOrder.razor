@@ -7,45 +7,48 @@
         <h2 class="header-text">Opret en ordre</h2>
     </div>
     <div class="foreground">
-        <div class="input-container">
-            <h6 class="red-text">Giv en kort beskrivelse af hvad der skal flyttes</h6>
-            <input class="input"/>
-        </div>
-        <div class="input-container">
-            <h6 class="red-text">Hvor skal varen hen</h6>
-            <input class="input" />
-        </div>
-        <div class="input-container">
-            <h6 class="red-text">Hvor skal varen hentes fra</h6>
-            <input class="input" />
-        </div>
-        <div class="input-container">
-            <h6 class="red-text">Hvor meget vejre varen i kilogram</h6>
-            <input class="input" />
-        </div>
-        <div class="input-container">
-            <h6 class="red-text">Angiv størrelsen på varen sådan her (længde*bredde*højde) i cm</h6>
-            <input class="input" />
-        </div>
-        <div class="input-container">
-            <h6 class="red-text">Angiv prisen du vil give for at få varen leveret i kroner</h6>
-            <input class="input" />
-        </div>
-        <div class="input-container">
-            <h6 class="red-text">Sæt ind et billede af varen</h6>
-            <input class="input" />
-        </div>
-        <div class="input-container">
-            <h6 class="red-text">Angiv et tidspunkt varen skal være leveret inden</h6>
-            <input class="input" />
-        </div>
-        <div class="input-container">
-            <h6 class="red-text">Specificer en type lastvogn der skal levere varen</h6>
-            <input class="input" />
-        </div>
+        @if(CreatedOrder != null) 
+        {
+            <div class="input-container">
+                <h6 class="red-text">Giv en kort beskrivelse af hvad der skal flyttes</h6>
+                <input type="text" class="input" @bind-value="CreatedOrder.Description" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Hvor skal varen hen</h6>
+                <input type="text" class="input" @bind-value="CreatedOrder.Destination" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Hvor skal varen hentes fra</h6>
+                <input type="text" class="input" @bind-value="CreatedOrder.Address" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Hvor meget vejre varen i kilogram</h6>
+                <input type="number" class="input" @bind-value="CreatedOrder.Weight" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Angiv størrelsen på varen sådan her (længde*bredde*højde) i cm</h6>
+                <input type="text" class="input" @bind-value="CreatedOrder.Size" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Angiv prisen du vil give for at få varen leveret i kroner</h6>
+                <input type="number" class="input" @bind-value="CreatedOrder.Price" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Sæt ind et billede af varen</h6>
+                <input type="text" class="input" @bind-value="CreatedOrder.ImageUrl" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Angiv et tidspunkt varen skal være leveret inden</h6>
+                <input type="date" class="input" @bind-value="CreatedOrder.ExpirationDate" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Specificer en type lastvogn der skal levere varen</h6>
+                <input type="text" class="input" @bind-value="CreatedOrder.TruckType.Trucktype" />
+            </div>
+        }        
         <div class="btn-container">
             <button class="btn">Gå tilbage</button>
-            <button class="btn">Oprete ordren</button>
+            <button class="btn" @onclick="SubmitOrder">Oprete ordren</button>
         </div>
     </div>
     
