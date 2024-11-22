@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.Signup"
+             xmlns:ViewModels="clr-namespace:MauiApp1.ViewModels"
+             xmlns:rd="clr-namespace:MauiApp1.Resources.Styles"
+             Title="">
+    <ContentPage.BindingContext>
+        <ViewModels:SignupViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <rd:SignupStyle/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid Style="{StaticResource Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Style="{StaticResource Headline}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span TextColor="White">
+                        <Span.Text>
+                            Opret en
+Konto
+                        </Span.Text>
+                    </Span>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Border Grid.Row="1" Style="{StaticResource LoginBackground}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="1" Grid.Column="1" Text="Fulde Navn" Style="{StaticResource SubHeadline}"/>
+                <Entry Grid.Row="2" Grid.Column="1" Style="{StaticResource Input}"/>
+                <Label Grid.Row="3" Grid.Column="1" Text="Mail" Style="{StaticResource SubHeadline}"/>
+                <Entry Grid.Row="4" Grid.Column="1" Style="{StaticResource Input}"/>
+                <Label Grid.Row="5" Grid.Column="1" Text="Telefon nummer" Style="{StaticResource SubHeadline}"/>
+                <Entry Grid.Row="6" Grid.Column="1" Style="{StaticResource Input}"/>
+                <Label Grid.Row="7" Grid.Column="1" Text="Password" Style="{StaticResource SubHeadline}"/>
+                <Entry Grid.Row="8" Grid.Column="1" Style="{StaticResource Input}"/>
+                <Label Grid.Row="9" Grid.Column="1" Text="Gentag password" Style="{StaticResource SubHeadline}"/>
+                <Entry Grid.Row="10" Grid.Column="1" Style="{StaticResource Input}"/>
+                <Button Grid.Row="12" Grid.Column="1" Text="SIGN UP" Style="{StaticResource SignupButton}"/>
+                <Label Grid.Row="14" Grid.ColumnSpan="3" HorizontalOptions="End" Text="har du allerede en konto" Style="{StaticResource Account}"/>
+                <Label Grid.Row="15" Grid.ColumnSpan="3" HorizontalOptions="End" Text="Log in" Style="{StaticResource LoginButton}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding login}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

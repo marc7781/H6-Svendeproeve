@@ -14,6 +14,18 @@ namespace WebApi.Controllers
             repo = new UserRepository();
         }
         [HttpGet]
+        public async Task<IActionResult> GetUserPasswrodAsync(string username)
+        {
+            try
+            {
+                return Ok(await repo.GetUserPasswordAsync(username));
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        [HttpGet("{userId}")]
         public async Task<IActionResult> GetUserAsync(int userId)
         {
             try

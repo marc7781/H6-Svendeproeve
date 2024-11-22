@@ -17,6 +17,17 @@ namespace ApiRepository
         {
             db = new Database();
         }
+        public async Task<User> GetUserPasswordAsync(string username)
+        {
+            DtoUser dtoUser = new DtoUser();
+            dtoUser = await db.Users.Include(x => x.UserCredentials).FirstOrDefaultAsync(x => x.UserInfo.Email == username);
+            User user = new User
+            {
+                Id = dtoUser.Id,
+                UserCredentials = new UserCredentials { Id = dtoUser.UserCredentials.Id, Password = dtoUser.UserCredentials.Password },
+            };
+            return user;
+        }
         public async Task<User> GetUserAsync(int userId)
         {
             DtoUser dtoUser = new DtoUser();

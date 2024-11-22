@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,5 +25,7 @@ namespace FrontendModels
         public User? Driver { get; set; }
         public int TruckTypeId { get; set; }
         public TruckType? TruckType { get; set; }
+        public double Distance { get; set; }
+
     }
 }
