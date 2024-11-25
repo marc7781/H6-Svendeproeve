@@ -39,7 +39,7 @@ namespace BlazorDBAccess
             HttpResponseMessage response;
             try
             {
-                response = await httpClient.GetAsync($"User/{mail}");
+                response = await httpClient.GetAsync($"User?username={mail}");
             }
             catch
             {
@@ -51,7 +51,7 @@ namespace BlazorDBAccess
             }
             return null;
         }
-        public async Task<DtoUser> CreateUserAsync(DtoUser dtoUser)
+        public async Task<bool> CreateUserAsync(DtoUser dtoUser)
         {
             if (dtoUser != null)
             {
@@ -64,14 +64,11 @@ namespace BlazorDBAccess
                 }
                 catch
                 {
-                    return null;
+                    return false;
                 }
-                if(response.IsSuccessStatusCode)
-                {
-                    return JsonConvert.DeserializeObject<DtoUser>(await response.Content.ReadAsStringAsync());
-                }
+                return response.IsSuccessStatusCode;
             }
-            return null;
+            return false;
         }
     }
 }

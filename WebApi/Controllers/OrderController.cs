@@ -38,6 +38,30 @@ namespace WebApi.Controllers
                 return NotFound();
             }
         }
+        [HttpGet("Customer/{ownerId}")]
+        public async Task<IActionResult> GetOrdersFromOwnerIdAsync(int ownerId)
+        {
+            try
+            {
+                return Ok(await repo.GetAllOrdersFromOwnerId(ownerId));
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
+        [HttpGet("Driver/{driverId}")]
+        public async Task<IActionResult> GetOrdersFromDriverIdAsync(int driverId)
+        {
+            try
+            {
+                return Ok(await repo.GetAllOrdersFromDriverId(driverId));
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
         [HttpPut]
         public async Task<IActionResult> UpdateOrderAsync(Order order)
         {
