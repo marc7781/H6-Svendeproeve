@@ -34,5 +34,44 @@ namespace BlazorDBAccess
             }
             return false;
         }
+        public async Task<DtoUser> GetUserFromMailAsync(string mail)
+        {
+            HttpResponseMessage response;
+            try
+            {
+                response = await httpClient.GetAsync($"User/{mail}");
+            }
+            catch
+            {
+                return null;
+            }
+            if(response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<DtoUser>(await response.Content.ReadAsStringAsync());
+            }
+            return null;
+        }
+        public async Task<DtoUser> CreateUserAsync(DtoUser dtoUser)
+        {
+            if (dtoUser != null)
+            {
+                string json = JsonConvert.SerializeObject(dtoUser);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response;
+                try
+                {
+                    response = await httpClient.PostAsync("User", content);
+                }
+                catch
+                {
+                    return null;
+                }
+                if(response.IsSuccessStatusCode)
+                {
+                    return JsonConvert.DeserializeObject<DtoUser>(await response.Content.ReadAsStringAsync());
+                }
+            }
+            return null;
+        }
     }
 }
