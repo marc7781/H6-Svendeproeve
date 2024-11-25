@@ -34,6 +34,23 @@ namespace BlazorDBAccess
             }
             return false;
         }
+        public async Task<List<DtoOrder>> GetOrdersFromOwnerIdAsync(int ownerId)
+        {
+            HttpResponseMessage response;
+            try
+            {
+                response = await httpClient.GetAsync($"Order/Customer?ownerId={ownerId}");
+            }
+            catch
+            {
+                return null;
+            }
+            if(response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<DtoOrder>>(await response.Content.ReadAsStringAsync());
+            }
+            return null;
+        }
         public async Task<DtoUser> GetUserFromMailAsync(string mail)
         {
             HttpResponseMessage response;
@@ -46,6 +63,23 @@ namespace BlazorDBAccess
                 return null;
             }
             if(response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<DtoUser>(await response.Content.ReadAsStringAsync());
+            }
+            return null;
+        }
+        public async Task<DtoUser> GetOneUserFromId(int id)
+        {
+            HttpResponseMessage response;
+            try
+            {
+                response = await httpClient.GetAsync($"User/{id}");
+            }
+            catch
+            {
+                return null;
+            }
+            if (response.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<DtoUser>(await response.Content.ReadAsStringAsync());
             }

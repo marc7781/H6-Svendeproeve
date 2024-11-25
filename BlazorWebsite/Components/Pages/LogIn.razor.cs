@@ -1,5 +1,8 @@
 ﻿using BlazorRepository;
+using BlazorWebsite.Utils;
 using FrontendModels;
+using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 
 namespace BlazorWebsite.Components.Pages
 {
@@ -9,10 +12,13 @@ namespace BlazorWebsite.Components.Pages
         private string mail { get; set; }
         private string password { get; set; }
         private UserRepository userRepo { get; set; }
+        private DotNetObjectReference<LocalStorageHelper> localStorageHelper;
+        
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
+                localStorageHelper = DotNetObjectReference.Create(new LocalStorageHelper(JS));
                 userRepo = new UserRepository();
                 StateHasChanged();
             }
@@ -30,6 +36,8 @@ namespace BlazorWebsite.Components.Pages
             }
             if (user != null)
             {
+                await localStorageHelper.Value.SaveAsync("id", user.Id.ToString());
+                navigationManager.NavigateTo("/Profile");
                 //log user in
             }
 

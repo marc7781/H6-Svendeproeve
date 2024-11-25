@@ -23,6 +23,7 @@ namespace BlazorRepository
             {
                 if(ValidatePassword(password, dtoUser.UserCredentials.Password))
                 {
+                    dtoUser = await db.GetOneUserFromId(dtoUser.Id);
                     return ConvertDtoToUser(dtoUser);
                 }
                 throw new Exception("Password don't match");
