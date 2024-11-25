@@ -30,24 +30,20 @@ namespace BlazorRepository
             throw new Exception($"Couldn't find a user with {mail} mail");
         }
 
-        public async Task<User> SignUserUpAsync(User user)
+        public async Task<bool> SignUserUpAsync(User user)
         {
+            user.TruckTypeId = 0;
             user.UserCredentials.Password = HashPassword(user.UserCredentials.Password);
-            DtoUser dtoUser;
+            bool checkIfSucces = false;
             try
             {
-                dtoUser = await db.CreateUserAsync(ConvertUserToDto(user));
+                checkIfSucces = await db.CreateUserAsync(ConvertUserToDto(user));
             }
             catch
             {
-                dtoUser = null;
+                return false;
             }
-            if(dtoUser != null)
-            {
-                return ConvertDtoToUser(dtoUser);
-
-            }
-            return null;
+            return checkIfSucces;
         }
 
         #region 
@@ -71,7 +67,7 @@ namespace BlazorRepository
                     Address = user.UserInfo.Address,
                     Phone_number = user.UserInfo.Phone_number,
                 },
-
+                TruckTypeId = user.TruckTypeId,
             };
             return dto;
         }
@@ -94,7 +90,6 @@ namespace BlazorRepository
                     Address = dto.UserInfo.Address,
                     Phone_number = dto.UserInfo.Phone_number,
                 },
-
             };
             return user;
         }

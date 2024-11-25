@@ -58,6 +58,56 @@ namespace ApiRepository
             }
             return orders;
         }
+        public async Task<List<Order>> GetAllOrdersFromOwnerId(int ownerId)
+        {
+            List<DtoOrder> dtoOrders = new List<DtoOrder>();
+            dtoOrders = await db.Orders.Where(x => x.OwnerId == ownerId).ToListAsync();
+            List<Order> orders = new List<Order>();
+            foreach (DtoOrder dtoOrder in dtoOrders)
+            {
+                Order order = new Order
+                {
+                    Id = dtoOrder.Id,
+                    Description = dtoOrder.Description,
+                    Destination = dtoOrder.Destination,
+                    Address = dtoOrder.Address,
+                    Size = dtoOrder.Size,
+                    Price = dtoOrder.Price,
+                    ExpirationDate = dtoOrder.ExpirationDate,
+                    ImageUrl = dtoOrder.ImageUrl,
+                    OwnerId = dtoOrder.OwnerId,
+                    DriverId = dtoOrder.DriverId,
+                    TruckTypeId = dtoOrder.TruckTypeId,
+                };
+                orders.Add(order);
+            }
+            return orders;
+        }
+        public async Task<List<Order>> GetAllOrdersFromDriverId(int driverId)
+        {
+            List<DtoOrder> dtoOrders = new List<DtoOrder>();
+            dtoOrders = await db.Orders.Where(x => x.OwnerId == driverId).ToListAsync();
+            List<Order> orders = new List<Order>();
+            foreach (DtoOrder dtoOrder in dtoOrders)
+            {
+                Order order = new Order
+                {
+                    Id = dtoOrder.Id,
+                    Description = dtoOrder.Description,
+                    Destination = dtoOrder.Destination,
+                    Address = dtoOrder.Address,
+                    Size = dtoOrder.Size,
+                    Price = dtoOrder.Price,
+                    ExpirationDate = dtoOrder.ExpirationDate,
+                    ImageUrl = dtoOrder.ImageUrl,
+                    OwnerId = dtoOrder.OwnerId,
+                    DriverId = dtoOrder.DriverId,
+                    TruckTypeId = dtoOrder.TruckTypeId,
+                };
+                orders.Add(order);
+            }
+            return orders;
+        }
         public async Task<bool> UpdateOrderAsync(Order order)
         {
             DtoOrder dtoOrder = new DtoOrder

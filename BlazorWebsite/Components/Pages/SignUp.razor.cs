@@ -26,7 +26,14 @@ namespace BlazorWebsite.Components.Pages
             {
                 user.UserCredentials.Password = password;
             }
-            await userRepo.SignUserUpAsync(user);
+            if(await userRepo.SignUserUpAsync(user))
+            {
+                //it worked
+            }
+            else
+            {
+                //it didn't work
+            }
         }
     }
 }

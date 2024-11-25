@@ -1,0 +1,31 @@
+﻿@page "/Profile"
+@rendermode InteractiveServer
+<PageTitle>Profil</PageTitle>
+
+<div class="container">
+    <div class="header">
+        @if(user != null) 
+        {
+            <h2 class="header-text">Hej @user.UserInfo.Name</h2>
+        }
+    </div>
+    <div class="order-container">
+        <div>
+            <h3>Dine aktive ordrer</h3>
+            <span>+</span>
+        </div>
+        @if (activeOrders != null)
+        {
+            @for (int i = 0; i < activeOrders.Count; i++)
+            {
+                <div class="foreground">
+
+                </div>
+            }
+        }
+        else 
+        {
+            <h6>Du har ikke noget aktive ordre</h6>
+        }
+    </div>
+</div>
