@@ -58,16 +58,16 @@ Konto
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="1" Grid.Column="1" Text="Fulde Navn" Style="{StaticResource SubHeadline}"/>
-                <Entry Grid.Row="2" Grid.Column="1" Style="{StaticResource Input}"/>
+                <Entry Grid.Row="2" Grid.Column="1" Text="{Binding name}" Style="{StaticResource Input}"/>
                 <Label Grid.Row="3" Grid.Column="1" Text="Mail" Style="{StaticResource SubHeadline}"/>
-                <Entry Grid.Row="4" Grid.Column="1" Style="{StaticResource Input}"/>
+                <Entry Grid.Row="4" Grid.Column="1" Text="{Binding mail}" Style="{StaticResource Input}"/>
                 <Label Grid.Row="5" Grid.Column="1" Text="Telefon nummer" Style="{StaticResource SubHeadline}"/>
-                <Entry Grid.Row="6" Grid.Column="1" Style="{StaticResource Input}"/>
+                <Entry Grid.Row="6" Grid.Column="1" Keyboard="Numeric" Text="{Binding phonenumber}" Style="{StaticResource Input}"/>
                 <Label Grid.Row="7" Grid.Column="1" Text="Password" Style="{StaticResource SubHeadline}"/>
-                <Entry Grid.Row="8" Grid.Column="1" Style="{StaticResource Input}"/>
+                <Entry Grid.Row="8" Grid.Column="1" IsPassword="True" Text="{Binding password}" Style="{StaticResource Input}"/>
                 <Label Grid.Row="9" Grid.Column="1" Text="Gentag password" Style="{StaticResource SubHeadline}"/>
-                <Entry Grid.Row="10" Grid.Column="1" Style="{StaticResource Input}"/>
-                <Button Grid.Row="12" Grid.Column="1" Text="SIGN UP" Style="{StaticResource SignupButton}"/>
+                <Entry Grid.Row="10" Grid.Column="1" IsPassword="True" Text="{Binding repeatedpassword}" Style="{StaticResource Input}"/>
+                <Button Grid.Row="12" Grid.Column="1" Text="SIGN UP" Command="{Binding signUp}" Style="{StaticResource SignupButton}"/>
                 <Label Grid.Row="14" Grid.ColumnSpan="3" HorizontalOptions="End" Text="har du allerede en konto" Style="{StaticResource Account}"/>
                 <Label Grid.Row="15" Grid.ColumnSpan="3" HorizontalOptions="End" Text="Log in" Style="{StaticResource LoginButton}">
                     <Label.GestureRecognizers>

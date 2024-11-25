@@ -30,12 +30,12 @@ namespace MauiApp1.ViewModels
             }
             try
             {
-                User user = await UserRepository.GetUserAsync(username, password);
-                if (user != null)
+                User user = await UserRepository.GetUserAsync(username);
+                if (user != null && BCrypt.Net.BCrypt.Verify(password, user.UserCredentials.Password))
                 {
                     await SecureStorage.Default.SetAsync("userId", user.Id.ToString());
 
-                    await Shell.Current.GoToAsync("//Events");
+                    await Shell.Current.GoToAsync("//Ordre");
                 }
             }
             catch (Exception)

@@ -52,10 +52,10 @@ Log in!
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Row="1" Grid.Column="1" Text="Mail" Style="{StaticResource SubHeadline}"/>
-                <Entry Grid.Row="2" Grid.Column="1" Style="{StaticResource Input}"/>
+                <Entry Grid.Row="2" Grid.Column="1" Text="{Binding username}"  Style="{StaticResource Input}"/>
                 <Label Grid.Row="3" Grid.Column="1" Text="Password" Style="{StaticResource SubHeadline}"/>
-                <Entry Grid.Row="4" Grid.Column="1" Style="{StaticResource Input}"/>
-                <Button Grid.Row="6" Grid.Column="1" Text="LOG IN" Style="{StaticResource LoginButton}"/>
+                <Entry Grid.Row="4" Grid.Column="1" IsPassword="True" Text="{Binding password}" Style="{StaticResource Input}"/>
+                <Button Grid.Row="6" Grid.Column="1" Text="LOG IN" Command="{Binding login}" Style="{StaticResource LoginButton}"/>
                 <Label Grid.Row="8" Grid.ColumnSpan="3" HorizontalOptions="End" Text="har du ikke en konto" Style="{StaticResource NoAccount}"/>
                 <Label Grid.Row="9" Grid.ColumnSpan="3" HorizontalOptions="End" Text="Sign up" Style="{StaticResource SignupButton}">
                     <Label.GestureRecognizers>
