@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Resources.Styles.ProfileStyle">
+    
+    <Style TargetType="Grid" x:Key="Background">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="1,0">
+                    <GradientStop Color="#C32424" Offset="0.1"/>
+                    <GradientStop Color="#2E0148" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="Border" x:Key="CollectionBorder">
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 15,15,15,15"/>
+        <Setter Property="Stroke" Value="Transparent"/>
+    </Style>
+    <Style TargetType="Label" x:Key="Headline">
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontSize" Value="40"/>
+        <Setter Property="Padding" Value="0,25,0,25"/>
+    </Style>
+    <Style TargetType="Label" x:Key="SubHeadline">
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontSize" Value="24"/>
+    </Style>
+    <Style TargetType="Border" x:Key="Footer">
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="Stroke">
+            <Setter.Value>
+                <LinearGradientBrush EndPoint="1,0">
+                    <GradientStop Color="#2E0148" Offset="0.1"/>
+                    <GradientStop Color="#C32424" Offset="1.0"/>
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="StrokeShape" Value="RoundRectangle 75,75,0,0"/>
+        <Setter Property="StrokeThickness" Value="4"/>
+    </Style>
+    <Style TargetType="Button" x:Key="FooterButton">
+        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="Padding" Value="20"/>
+        <Setter Property="Margin" Value="0"/>
+    </Style>
+</ResourceDictionary>
