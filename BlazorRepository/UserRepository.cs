@@ -23,12 +23,21 @@ namespace BlazorRepository
             {
                 if(ValidatePassword(password, dtoUser.UserCredentials.Password))
                 {
-                    dtoUser = await db.GetOneUserFromId(dtoUser.Id);
+                    dtoUser = await db.GetOneUserFromIdAsync(dtoUser.Id);
                     return ConvertDtoToUser(dtoUser);
                 }
                 throw new Exception("Password don't match");
             }
             throw new Exception($"Couldn't find a user with {mail} mail");
+        }
+        public async Task<User> GetUserFromIdAsync(int userId)
+        {
+            DtoUser dtoUser = await db.GetOneUserFromIdAsync(userId);
+            if(dtoUser != null)
+            {
+                return ConvertDtoToUser(dtoUser);
+            }
+            return null;
         }
 
         public async Task<bool> SignUserUpAsync(User user)

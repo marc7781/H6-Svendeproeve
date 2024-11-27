@@ -39,7 +39,7 @@ namespace BlazorDBAccess
             HttpResponseMessage response;
             try
             {
-                response = await httpClient.GetAsync($"Order/Customer?ownerId={ownerId}");
+                response = await httpClient.GetAsync($"Order/Customer/{ownerId}");
             }
             catch
             {
@@ -68,7 +68,7 @@ namespace BlazorDBAccess
             }
             return null;
         }
-        public async Task<DtoUser> GetOneUserFromId(int id)
+        public async Task<DtoUser> GetOneUserFromIdAsync(int id)
         {
             HttpResponseMessage response;
             try

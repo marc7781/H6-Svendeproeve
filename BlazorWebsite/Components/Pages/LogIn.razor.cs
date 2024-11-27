@@ -12,19 +12,19 @@ namespace BlazorWebsite.Components.Pages
         private string mail { get; set; }
         private string password { get; set; }
         private UserRepository userRepo { get; set; }
-        private DotNetObjectReference<LocalStorageHelper> localStorageHelper;
+        private LocalStorageHelper localStorageHelper;
         
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
-                localStorageHelper = DotNetObjectReference.Create(new LocalStorageHelper(JS));
                 userRepo = new UserRepository();
                 StateHasChanged();
             }
         }
         private async void LogUserInAsync()
         {
+            localStorageHelper = new LocalStorageHelper(JS);
             try
             {
                 user = await userRepo.LogInUserAsync(mail, password);
@@ -36,7 +36,7 @@ namespace BlazorWebsite.Components.Pages
             }
             if (user != null)
             {
-                await localStorageHelper.Value.SaveAsync("id", user.Id.ToString());
+                await localStorageHelper.SaveAsync("userId", user.Id.ToString());
                 navigationManager.NavigateTo("/Profile");
                 //log user in
             }

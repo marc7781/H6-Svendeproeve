@@ -13,7 +13,6 @@ namespace BlazorWebsite.Utils
 
         public async Task SaveAsync(string key, string value)
         {
-            //can't find localStorageHelper FIX ------------------------------------------------------------------------------
             await _jsRuntime.InvokeVoidAsync("localStorageHelper.save", key, value);
         }
 

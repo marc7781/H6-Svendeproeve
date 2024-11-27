@@ -24,6 +24,7 @@ namespace ApiRepository
                 Destination = dtoOrder.Destination,
                 Address = dtoOrder.Address,
                 Size = dtoOrder.Size,
+                Weight = dtoOrder.Weight,
                 Price = dtoOrder.Price,
                 ExpirationDate = dtoOrder.ExpirationDate,
                 ImageUrl = dtoOrder.ImageUrl,
@@ -47,6 +48,7 @@ namespace ApiRepository
                     Destination = dtoOrder.Destination,
                     Address = dtoOrder.Address,
                     Size = dtoOrder.Size,
+                    Weight = dtoOrder.Weight,
                     Price = dtoOrder.Price,
                     ExpirationDate = dtoOrder.ExpirationDate,
                     ImageUrl = dtoOrder.ImageUrl,
@@ -72,6 +74,7 @@ namespace ApiRepository
                     Destination = dtoOrder.Destination,
                     Address = dtoOrder.Address,
                     Size = dtoOrder.Size,
+                    Weight = dtoOrder.Weight,
                     Price = dtoOrder.Price,
                     ExpirationDate = dtoOrder.ExpirationDate,
                     ImageUrl = dtoOrder.ImageUrl,
@@ -97,6 +100,7 @@ namespace ApiRepository
                     Destination = dtoOrder.Destination,
                     Address = dtoOrder.Address,
                     Size = dtoOrder.Size,
+                    Weight = dtoOrder.Weight,
                     Price = dtoOrder.Price,
                     ExpirationDate = dtoOrder.ExpirationDate,
                     ImageUrl = dtoOrder.ImageUrl,
@@ -117,6 +121,7 @@ namespace ApiRepository
                 Destination = order.Destination,
                 Address = order.Address,
                 Size = order.Size,
+                Weight= order.Weight,
                 Price = order.Price,
                 ExpirationDate = order.ExpirationDate,
                 ImageUrl = order.ImageUrl,
@@ -159,6 +164,7 @@ namespace ApiRepository
                 Destination = order.Destination,
                 Address = order.Address,
                 Size = order.Size,
+                Weight = order.Weight,
                 Price = order.Price,
                 ExpirationDate = order.ExpirationDate,
                 ImageUrl = order.ImageUrl,
@@ -166,6 +172,10 @@ namespace ApiRepository
                 DriverId = order.DriverId,
                 TruckTypeId = order.TruckTypeId
             };
+            if(dtoOrder.DriverId == 0)
+            {
+                dtoOrder.DriverId = null;
+            }
             await db.Orders.AddAsync(dtoOrder);
             try
             {
