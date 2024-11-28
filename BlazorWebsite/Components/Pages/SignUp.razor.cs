@@ -1,5 +1,6 @@
 ﻿using BlazorRepository;
 using FrontendModels;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorWebsite.Components.Pages
 {
@@ -8,7 +9,8 @@ namespace BlazorWebsite.Components.Pages
         private User user { get; set; }
         private string password { get; set; }
         private string repeatedPassword { get; set; }
-        private UserRepository userRepo {  get; set; }
+        [Inject]
+        protected IUserRepository userRepo {  get; set; }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if(firstRender)

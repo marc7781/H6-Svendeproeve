@@ -11,7 +11,8 @@ namespace BlazorWebsite.Components.Pages
         private User user { get; set; }
         private string mail { get; set; }
         private string password { get; set; }
-        private UserRepository userRepo { get; set; }
+        [Inject]
+        protected IUserRepository userRepo { get; set; }
         private LocalStorageHelper localStorageHelper;
         
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -32,7 +33,6 @@ namespace BlazorWebsite.Components.Pages
             catch (Exception e)
             {
                 await RunErrorMsgAsync(e.Message);
-
             }
             if (user != null)
             {

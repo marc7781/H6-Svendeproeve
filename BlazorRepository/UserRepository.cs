@@ -9,9 +9,9 @@ using BlazorDBAccess;
 
 namespace BlazorRepository
 {
-    public class UserRepository : Encryption
+    public class UserRepository : Encryption, IUserRepository
     {
-        DBAccess db {  get; set; }
+        DBAccess db { get; set; }
         public UserRepository()
         {
             db = new DBAccess();
@@ -19,9 +19,9 @@ namespace BlazorRepository
         public async Task<User> LogInUserAsync(string mail, string password)
         {
             DtoUser dtoUser = await db.GetUserFromMailAsync(mail);
-            if(dtoUser != null)
+            if (dtoUser != null)
             {
-                if(ValidatePassword(password, dtoUser.UserCredentials.Password))
+                if (ValidatePassword(password, dtoUser.UserCredentials.Password))
                 {
                     dtoUser = await db.GetOneUserFromIdAsync(dtoUser.Id);
                     return ConvertDtoToUser(dtoUser);
@@ -33,7 +33,7 @@ namespace BlazorRepository
         public async Task<User> GetUserFromIdAsync(int userId)
         {
             DtoUser dtoUser = await db.GetOneUserFromIdAsync(userId);
-            if(dtoUser != null)
+            if (dtoUser != null)
             {
                 return ConvertDtoToUser(dtoUser);
             }

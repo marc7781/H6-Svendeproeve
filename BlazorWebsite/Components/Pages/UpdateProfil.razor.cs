@@ -5,21 +5,20 @@ using Microsoft.AspNetCore.Components;
 
 namespace BlazorWebsite.Components.Pages
 {
-    partial class Home
+    partial class UpdateProfil
     {
-        private User user { get; set; }
-        private List<Order> activeOrders { get; set; }
+        private User user {  get; set; }
+        private string currentPassword { get; set; }
+        private string newPassword { get; set; }
+        private string repeatedPassword { get; set; }
         [Inject]
-        protected IOrderRepository orderRepo { get; set; }
-        [Inject]
-        protected IUserRepository userRepo { get; set; }
-        private LocalStorageHelper localStorageHelper { get; set; }
+        protected IUserRepository userRepo {  get; set; }
+        private LocalStorageHelper localStorageHelper;
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
-            if (firstRender)
+            if(firstRender)
             {
                 localStorageHelper = new LocalStorageHelper(JS);
-                orderRepo = new OrderRepository();
                 userRepo = new UserRepository();
                 try
                 {
@@ -30,19 +29,19 @@ namespace BlazorWebsite.Components.Pages
                 {
                     //error happend from getting user from localStorage
                     navigationManager.NavigateTo("/Login");
+                    return;
                 }
                 if (user == null)
                 {
                     navigationManager.NavigateTo("/Login");
                     return;
                 }
-                activeOrders = await orderRepo.GetOrdersFromOwnerIdAsync(user.Id);
                 StateHasChanged();
             }
         }
-        private void GoToCreate()
+        private void SubmitUpdate()
         {
-            navigationManager.NavigateTo("/CreateOrder");
+
         }
     }
 }

@@ -1,12 +1,15 @@
 ﻿using FrontendModels;
 using BlazorRepository;
 using BlazorWebsite.Utils;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorWebsite.Components.Pages
 {
     public partial class CreateOrder
     {
-        protected OrderRepository orderRepo;
+        [Inject]
+        protected IOrderRepository orderRepo { get; set; }
+
         public Order CreatedOrder { get; set; }
         private LocalStorageHelper localStorageHelper;
         private int ownerId {  get; set; }

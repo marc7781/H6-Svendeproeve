@@ -9,16 +9,16 @@ using BackendModels;
 
 namespace BlazorRepository
 {
-    public class OrderRepository
+    public class OrderRepository : IOrderRepository
     {
-        public DBAccess db { get; set; }
+        private DBAccess db { get; set; }
         public OrderRepository()
         {
             db = new DBAccess();
         }
         public async Task<bool> CreateOrderAsync(Order createdOrder)
         {
-            if(createdOrder != null)
+            if (createdOrder != null)
             {
                 createdOrder.TruckTypeId = 1;
                 return await db.CreateOrderAsync(ConvertOrderToDto(createdOrder));
@@ -28,7 +28,7 @@ namespace BlazorRepository
         public async Task<List<Order>> GetOrdersFromOwnerIdAsync(int ownerId)
         {
             List<DtoOrder> dtoOrders = await db.GetOrdersFromOwnerIdAsync(ownerId);
-            if(dtoOrders != null)
+            if (dtoOrders != null)
             {
                 List<Order> orders = new List<Order>();
                 foreach (DtoOrder dtoOrder in dtoOrders)
