@@ -5,7 +5,10 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
 using FrontendModels;
+using MauiApp1.Views;
 using MauiRepository;
 using Microsoft.Extensions.Logging;
 
@@ -19,7 +22,8 @@ namespace MauiApp1.ViewModels
         public Command profile {  get; set; }
         public Command ratings { get; set; }
         public Command home {  get; set; }
-        public Command logout { get; set; }
+        public Command settings { get; set; }
+        public Command tagOrder { get; set; }
         public FindOrderViewModel()
         {
             orderRepository = new OrderRepository();
@@ -27,7 +31,8 @@ namespace MauiApp1.ViewModels
             profile = new Command(Profile);
             home = new Command(Home);
             ratings = new Command(Ratings);
-            logout = new Command(Logout);
+            settings = new Command(Settings);
+            tagOrder = new Command<Order>(TagOrder);
         }
         private async void GetOrder()
         {
@@ -62,21 +67,25 @@ namespace MauiApp1.ViewModels
         {
             return deg * (Math.PI / 180);
         }
+        private async void TagOrder(Order order)
+        {
+            await Shell.Current.ShowPopupAsync(new FindOrderPopUp(order));
+        }
         private async void Profile()
         {
             await Shell.Current.GoToAsync("//Profile", false);
         }
         private async void Home()
         {
-            await Shell.Current.GoToAsync("//Order");
+            await Shell.Current.GoToAsync("//Ordre");
         }
         private async void Ratings()
         {
             await Shell.Current.GoToAsync("//Ratings");
         }
-        private async void Logout()
+        private async void Settings()
         {
-            await Shell.Current.GoToAsync("//Login");
+            await Shell.Current.GoToAsync("//Settings");
         }
     }
 }

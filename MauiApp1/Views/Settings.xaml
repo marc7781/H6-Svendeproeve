@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.Settings"
+             xmlns:ViewModels="clr-namespace:MauiApp1.ViewModels"
+             xmlns:rd="clr-namespace:MauiApp1.Resources.Styles"
+             Title="">
+    <ContentPage.BindingContext>
+        <ViewModels:SettingsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <rd:SettingsStyle/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid Style="{StaticResource Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource Headline}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span TextColor="White">
+                        <Span.Text>
+                            Ændre dine
+oplysninger
+                        </Span.Text>
+                    </Span>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <VerticalStackLayout Grid.Row="1" Grid.Column="1">
+            <Border Style="{StaticResource BorderBackground}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="45"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0" Grid.Column="1" Text="Mail" Style="{StaticResource SubHeadline}"/>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding name}" Style="{StaticResource Input}"/>
+                    <Label Grid.Row="2" Grid.Column="1" Text="Telefonnummer" Style="{StaticResource SubHeadline}"/>
+                    <Entry Grid.Row="3" Grid.Column="1" Text="{Binding nummer}" Style="{StaticResource Input}"/>
+                    <Label Grid.Row="4" Grid.Column="1" Text="Lastbil type" Style="{StaticResource SubHeadline}"/>
+                    <Picker Grid.Row="5" Grid.Column="1" ItemsSource="{Binding trucks}" Title="Vælg lastbil type" ItemDisplayBinding="{Binding Trucktype}" SelectedItem="{Binding SelectedTruck}"/>
+                    <Label Grid.Row="6" Grid.Column="1" Text="Password" Style="{StaticResource SubHeadline}"/>
+                    <Entry Grid.Row="7" Grid.Column="1" Text="{Binding password}" IsPassword="True" Style="{StaticResource Input}"/>
+                    <Label Grid.Row="8" Grid.Column="1" Text="Gentag password" Style="{StaticResource SubHeadline}"/>
+                    <Entry Grid.Row="9" Grid.Column="1" Text="{Binding repeatPassword}" IsPassword="True" Style="{StaticResource Input}"/>
+                    <Button Grid.Row="11" Grid.Column="1" WidthRequest="100" HorizontalOptions="Start" Text="Log ud" Command="{Binding logout}" Style="{StaticResource LogoutButton}"/>
+                    <Button Grid.Row="11" Grid.Column="1" WidthRequest="100" HorizontalOptions="End" Text="Gem" Command="{Binding save}" Style="{StaticResource SaveButton}"/>
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="2" Grid.ColumnSpan="3">
+            <Border Style="{StaticResource Footer}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" ImageSource="star.png" Command="{Binding ratings}" Style="{StaticResource FooterButton}"/>
+                    <Button Grid.Column="2" ImageSource="profile.png" Command="{Binding profile}" Style="{StaticResource FooterButton}"/>
+                    <Button Grid.Column="3" ImageSource="market.png" Command="{Binding home}" Style="{StaticResource FooterButton}"/>
+                    <Button Grid.Column="4" ImageSource="setting.png" Command="{Binding settings}" Style="{StaticResource FooterButton}"/>
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

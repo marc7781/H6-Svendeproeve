@@ -7,18 +7,24 @@
     Shell.FlyoutBehavior="Disabled"
     xmlns:view="clr-namespace:MauiApp1.Views"
     Title="MauiApp1">
-
-    <ShellContent
-        ContentTemplate="{DataTemplate view:FindOrder}"
-        Route="Ordre" />
+    
     <ShellContent
         ContentTemplate="{DataTemplate view:Login}"
         Route="Login" />
+    <ShellContent
+        ContentTemplate="{DataTemplate view:FindOrder}"
+        Route="Ordre" />
     <ShellContent
         ContentTemplate="{DataTemplate view:Signup}"
         Route="Signup" />
     <ShellContent
         ContentTemplate="{DataTemplate view:Profile}"
         Route="Profile" />
+    <ShellContent
+        ContentTemplate="{DataTemplate view:InspectOrder}"
+        Route="InspectOrder" />
+    <ShellContent
+        ContentTemplate="{DataTemplate view:Settings}"
+        Route="Settings" />
 
 </Shell>

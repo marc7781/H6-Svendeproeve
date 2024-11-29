@@ -26,7 +26,7 @@
             <ColumnDefinition Width="50"/>
         </Grid.ColumnDefinitions>
         <ScrollView Grid.Row="0" Grid.Column="1" >
-            <VerticalStackLayout>
+            <VerticalStackLayout x:Name="MainBorder">
                 <VerticalStackLayout>
                     <Label Text="Find Ordre" Style="{StaticResource Headline}"/>
                     <Label Text="Ordre tættest på dig" Style="{StaticResource SubHeadline}"/>
@@ -53,15 +53,15 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="10"/>
                                         </Grid.ColumnDefinitions>
-                                        <Border Grid.ColumnSpan="3" Grid.Row="0" Style="{StaticResource ImageBorder}">
-                                            <!--<Image Source="" Aspect="Fill"/>-->
-                                        </Border>
+                                        <!--<Border Grid.ColumnSpan="3" Grid.Row="0" Style="{StaticResource ImageBorder}">
+                                            --><!--<Image Source="" Aspect="Fill"/>--><!--
+                                        </Border>-->
                                         <Label Grid.Row="1" Grid.Column="1" Text="{Binding Description}" HorizontalOptions="Start"/>
                                         <Label Grid.Row="1" Grid.Column="1" Text="{Binding Price}" HorizontalOptions="End"/>
                                         <Label Grid.Row="2" Grid.Column="1" Text="{Binding Address}"/>
                                         <Label Grid.Row="3" Grid.Column="1" Text="{Binding Destination}"/>
                                         <Label Grid.Row="4" Grid.Column="1" Text="{Binding ExpirationDate}"/>
-                                        <Button Grid.Row="5" Grid.Column="1" Text="Tag ordre" Style="{StaticResource TagOrdreButton}"/>
+                                        <Button Grid.Row="5" Grid.Column="1" Text="Tag ordre" Command="{Binding Path=BindingContext.tagOrder, Source={Reference MainBorder}}" CommandParameter="{Binding .}" Style="{StaticResource TagOrdreButton}"/>
                                     </Grid>
                                 </ContentView>
                             </Border>
@@ -84,7 +84,7 @@
                     <Button Grid.Column="1" ImageSource="star.png" Command="{Binding ratings}" Style="{StaticResource FooterButton}"/>
                     <Button Grid.Column="2" ImageSource="profile.png" Command="{Binding profile}" Style="{StaticResource FooterButton}"/>
                     <Button Grid.Column="3" ImageSource="market.png" Command="{Binding home}" Style="{StaticResource FooterButton}"/>
-                    <Button Grid.Column="4" ImageSource="logout.png" Command="{Binding logout}" Style="{StaticResource FooterButton}"/>
+                    <Button Grid.Column="4" ImageSource="setting.png" Command="{Binding settings}" Style="{StaticResource FooterButton}"/>
                 </Grid>
             </Border>
         </VerticalStackLayout>

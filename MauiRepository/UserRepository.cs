@@ -19,7 +19,7 @@ namespace MauiRepository
         }
         public async Task<User> GetUserAsync(string username)
         {
-            DtoUser dtoUser = await db.GetUserAsync(username);
+            DtoUser dtoUser = await db.GetUserUsernameAsync(username);
             User user = new User
             {
                 Id = dtoUser.Id,
@@ -30,6 +30,47 @@ namespace MauiRepository
                 }
             };
             return user;
+        }
+        public async Task<User> GetUserAsync(int userId)
+        {
+            DtoUser dtoUser = await db.GetUserUserIdAsync(userId);
+            User user = new User
+            {
+                Id = dtoUser.Id,
+                Driver = dtoUser.Driver,
+                UserCredentials = new UserCredentials { Id = dtoUser.UserCredentials.Id, Password = dtoUser.UserCredentials.Password },
+                UserInfo = new UserInfo 
+                { 
+                    Id = dtoUser.UserInfo.Id,
+                    Name = dtoUser.UserInfo.Name,
+                    Email = dtoUser.UserInfo.Email,
+                    Phone_number = dtoUser.UserInfo.Phone_number,
+                },
+                TruckTypeId = (int)dtoUser.TruckTypeId,
+            };
+            return user;
+        }
+        public async Task<bool> UpdateUserAync(User user)
+        {
+            DtoUser dtoUser = new DtoUser
+            {
+                Id = user.Id,
+                Driver = user.Driver,
+                UserCredentials = new DtoUserCredentials
+                {
+                    Id = user.UserCredentials.Id,
+                    Password = user.UserCredentials.Password,
+                },
+                UserInfo = new DtoUserInfo
+                {
+                    Id =user.UserInfo.Id,
+                    Name = user.UserInfo.Name,
+                    Email = user.UserInfo.Email,
+                    Phone_number = user.UserInfo.Phone_number,
+                },
+                TruckTypeId = user.TruckTypeId,
+            };
+            return await db.UpdateUserAsync(dtoUser);
         }
         public async Task<bool> CreateUserAsync(User user)
         {

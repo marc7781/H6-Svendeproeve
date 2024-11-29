@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.FindOrderPopUp"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:rd="clr-namespace:MauiApp1.Resources.Styles"
+             xmlns:ViewModels="clr-namespace:MauiApp1.ViewModels"
+             x:DataType="ViewModels:FindOrderPopUpViewModel"
+             Size="375,465"
+             Color="Transparent">
+    <mct:Popup.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <rd:FindOrderPopUpStyle/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </mct:Popup.Resources>
+    <Border Style="{StaticResource Background}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="45"/>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Style="{StaticResource Headline}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span TextColor="Black">
+                            <Span.Text>
+                                Er du sikker på du vil tage
+ansvaret for at få denne vare
+leveret
+                            </Span.Text>
+                        </Span>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label Grid.Row="2" Text="Angiv din pris" Style="{StaticResource SubHeadline}"/>
+            <Entry Grid.Row="3" x:Name="Input" Keyboard="Numeric" Placeholder="" Text="{Binding price}">
+                <Entry.Behaviors>
+                    <toolkit:EventToCommandBehavior 
+                        EventName="PropertyChanged" Command="{Binding changePrice}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Button Grid.Row="5" HorizontalOptions="Start" Text="Gå tilbage" WidthRequest="130" Clicked="Button_Clicked" Style="{StaticResource Buttons}"/>
+            <Button Grid.Row="5" HorizontalOptions="End" Text="Godkend" WidthRequest="130" Command="{Binding confirm}" Style="{StaticResource Buttons}">
+                <Button.Triggers>
+                    <MultiTrigger TargetType="Button">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding newPrice}" Value="true" />
+                        </MultiTrigger.Conditions>
+                        <Setter Property="Text" Value="Anmod om pris ændring"/>
+                        <Setter Property="WidthRequest" Value="204"/>
+                        <Setter Property="IsVisible" Value="Visible"/>
+                    </MultiTrigger>
+                </Button.Triggers>
+            </Button>
+        </Grid>
+    </Border>
+</mct:Popup>

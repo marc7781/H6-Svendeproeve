@@ -31,6 +31,41 @@
                     <Label Text="Hej" Style="{StaticResource Headline}"/>
                     <Label Text="Aktive ordre" Style="{StaticResource SubHeadline}"/>
                 </VerticalStackLayout>
+                <CollectionView ItemsSource="{Binding orders}" x:Name="mColloctionView" SelectionMode="Single" SelectedItem="{Binding SelectedOrder}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="10"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource CollectionBorder}">
+                                <ContentView>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="250"/>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="10"/>
+                                        </Grid.ColumnDefinitions>
+                                        <!--<Border Grid.ColumnSpan="3" Grid.Row="0" Style="{StaticResource ImageBorder}">
+                                            --><!--<Image Source="" Aspect="Fill"/>--><!--
+                                        </Border>-->
+                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Description}" HorizontalOptions="Start"/>
+                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Price}" HorizontalOptions="End"/>
+                                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding Address}"/>
+                                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding Destination}"/>
+                                        <Label Grid.Row="4" Grid.Column="1" Text="{Binding ExpirationDate}"/>
+                                    </Grid>
+                                </ContentView>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </VerticalStackLayout>
         </ScrollView>
         <VerticalStackLayout Grid.Row="1" Grid.ColumnSpan="3">
@@ -47,7 +82,7 @@
                     <Button Grid.Column="1" ImageSource="star.png" Command="{Binding ratings}" Style="{StaticResource FooterButton}"/>
                     <Button Grid.Column="2" ImageSource="profile.png" Command="{Binding profile}" Style="{StaticResource FooterButton}"/>
                     <Button Grid.Column="3" ImageSource="market.png" Command="{Binding home}" Style="{StaticResource FooterButton}"/>
-                    <Button Grid.Column="4" ImageSource="logout.png" Command="{Binding logout}" Style="{StaticResource FooterButton}"/>
+                    <Button Grid.Column="4" ImageSource="setting.png" Command="{Binding settings}" Style="{StaticResource FooterButton}"/>
                 </Grid>
             </Border>
         </VerticalStackLayout>
