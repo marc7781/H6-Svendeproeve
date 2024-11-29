@@ -74,6 +74,18 @@ namespace WebApi.Controllers
                 return NotFound();
             }
         }
+        [HttpPut("AddDriver")]
+        public async Task<IActionResult> AddDriverToOrderAsync(Order order)
+        {
+            try
+            {
+                return Ok(await repo.UpdateOrderAsync(order));
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
         [HttpDelete]
         public async Task<IActionResult> DeleteOrderAsync(int orderId)
         {
