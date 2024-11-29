@@ -44,5 +44,9 @@ namespace BlazorWebsite.Components.Pages
         {
             navigationManager.NavigateTo("/CreateOrder");
         }
+        private void GoToUpdate(int orderId)
+        {
+            navigationManager.NavigateTo($"/UpdateOrder/{orderId}");
+        }
     }
 }

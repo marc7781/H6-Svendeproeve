@@ -45,7 +45,7 @@
                                     <p>for @(activeOrders[i].Price) kr.- </p>
                                 </div>
                                 <div class="bottom-container">
-                                    <button class="btn">Redigere ordre</button>
+                                    <button class="btn" @onclick="() => GoToUpdate(activeOrders[i].Id)">Redigere ordre</button>
                                 </div>
                             }
                         </div>

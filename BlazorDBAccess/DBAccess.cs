@@ -51,6 +51,42 @@ namespace BlazorDBAccess
             }
             return null;
         }
+        public async Task<DtoOrder> GetOrderFromIdAsync(int orderId)
+        {
+            HttpResponseMessage response;
+            try
+            {
+                response = await httpClient.GetAsync($"Order/{orderId}");
+            }
+            catch
+            {
+                return null;
+            }
+            if(response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<DtoOrder>(await response.Content.ReadAsStringAsync());
+            }
+            return null;
+        }
+        public async Task<bool> UpdateOrderAsync(DtoOrder order)
+        {
+            if (order != null)
+            {
+                string json = JsonConvert.SerializeObject(order);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response;
+                try
+                {
+                    response = await httpClient.PutAsync("Order", content);
+                }
+                catch
+                {
+                    return false;
+                }
+                return response.IsSuccessStatusCode;
+            }
+            return false;
+        }
         public async Task<DtoUser> GetUserFromMailAsync(string mail)
         {
             HttpResponseMessage response;

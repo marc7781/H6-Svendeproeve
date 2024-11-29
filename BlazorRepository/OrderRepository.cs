@@ -39,8 +39,26 @@ namespace BlazorRepository
             }
             return null;
         }
+        public async Task<Order> GetOrderFromIdAsync(int orderId)
+        {
+            DtoOrder dto = await db.GetOrderFromIdAsync(orderId);
+            if(dto != null)
+            {
+                Order order = ConvertDtoToOrder(dto);
+                return order;
+            }
+            return null;
+        }
 
-
+        public async Task<bool> UpdateOrderAsync(Order order)
+        {
+            if(order != null)
+            {
+                DtoOrder dto = ConvertOrderToDto(order);
+                return await db.UpdateOrderAsync(dto);
+            }
+            return false;
+        }
 
 
         #region ConvertModels

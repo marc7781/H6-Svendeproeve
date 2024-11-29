@@ -7,5 +7,7 @@ namespace BlazorRepository
     {
         Task<bool> CreateOrderAsync(Order createdOrder);
         Task<List<Order>> GetOrdersFromOwnerIdAsync(int ownerId);
+        Task<Order> GetOrderFromIdAsync(int orderId);
+        Task<bool> UpdateOrderAsync(Order order);
     }
 }
