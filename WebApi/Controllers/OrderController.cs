@@ -86,6 +86,18 @@ namespace WebApi.Controllers
                 return NotFound();
             }
         }
+        [HttpPut("PriceChange")]
+        public async Task<IActionResult> PriceChangeToOrderAsync(Order order)
+        {
+            try
+            {
+                return Ok(await repo.UpdateOrderAsync(order));
+            }
+            catch
+            {
+                return NotFound();
+            }
+        }
         [HttpDelete]
         public async Task<IActionResult> DeleteOrderAsync(int orderId)
         {
