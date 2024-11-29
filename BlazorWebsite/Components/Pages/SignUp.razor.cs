@@ -1,5 +1,6 @@
 ﻿using BlazorRepository;
 using FrontendModels;
+using Microsoft.AspNetCore.Components;
 
 namespace BlazorWebsite.Components.Pages
 {
@@ -8,7 +9,8 @@ namespace BlazorWebsite.Components.Pages
         private User user { get; set; }
         private string password { get; set; }
         private string repeatedPassword { get; set; }
-        private UserRepository userRepo {  get; set; }
+        [Inject]
+        protected IUserRepository userRepo {  get; set; }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if(firstRender)
@@ -20,19 +22,42 @@ namespace BlazorWebsite.Components.Pages
                 StateHasChanged();
             }
         }
+        private bool ValidateInfo()
+        {
+            if(string.IsNullOrEmpty(user.UserInfo.Name) && user.UserInfo.Name.Length < 4)
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(user.UserInfo.Email) && user.UserInfo.Email.Length < 5 && user.UserInfo.Email.Contains('@'))
+            {
+                return false;
+            }
+            if (user.UserInfo.Phone_number < 9999999 && user.UserInfo.Phone_number > 100000000)
+            {
+                return false;
+            }
+            if (string.IsNullOrEmpty(user.UserInfo.Address) && user.UserInfo.Address.Length < 4)
+            {
+                return false;
+            }
+            return true;
+        }
         private async void SignUserUp()
         {
-            if(password == repeatedPassword)
+            if(ValidateInfo())
             {
-                user.UserCredentials.Password = password;
-            }
-            if(await userRepo.SignUserUpAsync(user))
-            {
-                //it worked
-            }
-            else
-            {
-                //it didn't work
+                if (password == repeatedPassword)
+                {
+                    user.UserCredentials.Password = password;
+                }
+                if (await userRepo.SignUserUpAsync(user))
+                {
+                    //it worked
+                }
+                else
+                {
+                    //it didn't work
+                }
             }
         }
     }

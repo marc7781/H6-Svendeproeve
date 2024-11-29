@@ -9,9 +9,9 @@ using BlazorDBAccess;
 
 namespace BlazorRepository
 {
-    public class UserRepository : Encryption
+    public class UserRepository : Encryption, IUserRepository
     {
-        DBAccess db {  get; set; }
+        DBAccess db { get; set; }
         public UserRepository()
         {
             db = new DBAccess();
@@ -19,15 +19,25 @@ namespace BlazorRepository
         public async Task<User> LogInUserAsync(string mail, string password)
         {
             DtoUser dtoUser = await db.GetUserFromMailAsync(mail);
-            if(dtoUser != null)
+            if (dtoUser != null)
             {
-                if(ValidatePassword(password, dtoUser.UserCredentials.Password))
+                if (ValidatePassword(password, dtoUser.UserCredentials.Password))
                 {
+                    dtoUser = await db.GetOneUserFromIdAsync(dtoUser.Id);
                     return ConvertDtoToUser(dtoUser);
                 }
                 throw new Exception("Password don't match");
             }
             throw new Exception($"Couldn't find a user with {mail} mail");
+        }
+        public async Task<User> GetUserFromIdAsync(int userId)
+        {
+            DtoUser dtoUser = await db.GetOneUserFromIdAsync(userId);
+            if (dtoUser != null)
+            {
+                return ConvertDtoToUser(dtoUser);
+            }
+            return null;
         }
 
         public async Task<bool> SignUserUpAsync(User user)
@@ -44,6 +54,24 @@ namespace BlazorRepository
                 return false;
             }
             return checkIfSucces;
+        }
+
+        public async Task<bool> UpdateUserAsync(User user)
+        {
+            if(user != null)
+            {
+                return await db.UpdateUserAsync(ConvertUserToDto(user));
+            }
+            return false;
+        }
+        public async Task<bool> UpdateUserAndPasswordAsync(User user)
+        {
+            if (user != null)
+            {
+                user.UserCredentials.Password = HashPassword(user.UserCredentials.Password);
+                return await db.UpdateUserAsync(ConvertUserToDto(user));
+            }
+            return false;
         }
 
         #region 

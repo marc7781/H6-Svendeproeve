@@ -1,3 +1,61 @@
 ﻿@page "/"
 
-<PageTitle>Profile</PageTitle>
+@rendermode InteractiveServer
+<PageTitle>Profil</PageTitle>
+
+<div class="container">
+    @if (user != null)
+    {
+        <div class="header">
+            <h2 class="header-text">Hej @user.UserInfo.Name</h2>
+        </div>
+        <div class="order-container">
+            <div class="info-text">
+                <h3>Dine aktive ordrer</h3>
+                <span @onclick="GoToCreate" class="add-btn">+</span>
+            </div>
+            @if (activeOrders != null)
+            {
+                @for (int i = 0; i < activeOrders.Count; i++)
+                {
+                    <div class="foreground">
+                        <div class="image-container">
+                            <img src="https://plugins.shopware-staging.overdose.digital/thumbnail/d3/e3/a5/1690970711/test%20%281%29_1920x1920.png" />
+                        </div>
+                        <div class="left-info-container">
+                            <div class="top-container">
+                                <p>@activeOrders[i].Description</p>
+                            </div>
+                            <div class="bottom-container">
+                                <p>Fra @activeOrders[i].Address</p>
+                                <p>Til @activeOrders[i].Destination</p>
+                                <p>Leverings dato: @activeOrders[i].ExpirationDate.Date</p>
+                            </div>
+                        </div>
+                        <div class="right-info-container">
+                            @if(activeOrders[i].Driver != null)
+                            {
+                                <p>Ordre taget af @activeOrders[i].Driver.UserInfo.Name</p>
+                                <p>for @(activeOrders[i].Price) kr.- </p>
+                            }
+                            else 
+                            {
+                                <div class="top-container">
+                                    <p>Ingen har taget imod ordren endnu</p>
+                                    <p>for @(activeOrders[i].Price) kr.- </p>
+                                </div>
+                                <div class="bottom-container">
+                                    <button class="btn">Redigere ordre</button>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <h6>Du har ikke noget aktive ordre</h6>
+            }
+        </div>
+    }
+</div>

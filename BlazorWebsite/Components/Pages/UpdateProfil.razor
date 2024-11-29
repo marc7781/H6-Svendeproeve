@@ -1,0 +1,44 @@
+﻿@page "/edit-profile"
+@rendermode InteractiveServer
+
+<PageTitle>Redigere profil</PageTitle>
+
+<div class="container">
+    <div class="header">
+        <h2 class="header-text">Opret en ordre</h2>
+    </div>
+    <div class="foreground">
+        @if (user != null)
+        {
+            <div class="input-container">
+                <h6 class="red-text">Din mail</h6>
+                <input type="text" class="input" @bind-value="currentMail" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Dit telefon nummer</h6>
+                <input type="number" class="input" @bind-value="phoneNumber" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Din adresse</h6>
+                <input type="text" class="input" @bind-value="address" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Dit kodeord (skal udfyldes)</h6>
+                <input type="password" class="input" @bind-value="currentPassword" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Nyt kodeord (udfyld kun vis du vil ændre dit kodeord)</h6>
+                <input type="password" class="input" @bind-value="newPassword" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Gentag nyt kodeord (udfyld kun vis du vil ændre dit kodeord)</h6>
+                <input type="password" class="input" @bind-value="repeatedPassword" />
+            </div>
+        }
+        <div class="btn-container">
+            <button class="btn">Gå tilbage</button>
+            <button class="btn" @onclick="SubmitUpdate">Gem ændringerne</button>
+        </div>
+    </div>
+
+</div>

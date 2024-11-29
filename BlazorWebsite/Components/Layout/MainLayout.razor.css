@@ -1,6 +1,7 @@
 .layout-container {
     background-image: linear-gradient(to right, #C32424, #2E0148);
     min-height: 100vh;
+    overflow: auto;
 }
 .page {
     position: relative;
