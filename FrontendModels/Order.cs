@@ -26,6 +26,7 @@ namespace FrontendModels
         public int TruckTypeId { get; set; }
         public TruckType? TruckType { get; set; }
         public double Distance { get; set; }
+        public bool Pending { get; set; }
 
     }
 }

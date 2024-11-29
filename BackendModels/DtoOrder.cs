@@ -23,5 +23,6 @@ namespace BackendModels
         public DtoUser Driver { get; set; }
         public int TruckTypeId { get; set; }
         public DtoTruckType TruckType { get; set; }
+        public bool Pending { get; set; }
     }
 }
