@@ -56,6 +56,24 @@ namespace BlazorRepository
             return checkIfSucces;
         }
 
+        public async Task<bool> UpdateUserAsync(User user)
+        {
+            if(user != null)
+            {
+                return await db.UpdateUserAsync(ConvertUserToDto(user));
+            }
+            return false;
+        }
+        public async Task<bool> UpdateUserAndPasswordAsync(User user)
+        {
+            if (user != null)
+            {
+                user.UserCredentials.Password = HashPassword(user.UserCredentials.Password);
+                return await db.UpdateUserAsync(ConvertUserToDto(user));
+            }
+            return false;
+        }
+
         #region 
 
         private DtoUser ConvertUserToDto(User user)

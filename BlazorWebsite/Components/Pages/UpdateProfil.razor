@@ -12,27 +12,27 @@
         {
             <div class="input-container">
                 <h6 class="red-text">Din mail</h6>
-                <input type="text" class="input" @bind-value="user.UserInfo.Email" />
+                <input type="text" class="input" @bind-value="currentMail" />
             </div>
             <div class="input-container">
                 <h6 class="red-text">Dit telefon nummer</h6>
-                <input type="text" class="input" @bind-value="user.UserInfo.Phone_number" />
+                <input type="number" class="input" @bind-value="phoneNumber" />
             </div>
             <div class="input-container">
                 <h6 class="red-text">Din adresse</h6>
-                <input type="text" class="input" @bind-value="user.UserInfo.Address" />
+                <input type="text" class="input" @bind-value="address" />
             </div>
             <div class="input-container">
                 <h6 class="red-text">Dit kodeord (skal udfyldes)</h6>
-                <input type="text" class="input" @bind-value="currentPassword" />
+                <input type="password" class="input" @bind-value="currentPassword" />
             </div>
             <div class="input-container">
-                <h6 class="red-text">Nyt kodeord</h6>
-                <input type="text" class="input" @bind-value="newPassword" />
+                <h6 class="red-text">Nyt kodeord (udfyld kun vis du vil ændre dit kodeord)</h6>
+                <input type="password" class="input" @bind-value="newPassword" />
             </div>
             <div class="input-container">
-                <h6 class="red-text">Gentag nyt kodeord</h6>
-                <input type="text" class="input" @bind-value="repeatedPassword" />
+                <h6 class="red-text">Gentag nyt kodeord (udfyld kun vis du vil ændre dit kodeord)</h6>
+                <input type="password" class="input" @bind-value="repeatedPassword" />
             </div>
         }
         <div class="btn-container">

@@ -104,5 +104,24 @@ namespace BlazorDBAccess
             }
             return false;
         }
+        public async Task<bool> UpdateUserAsync(DtoUser dtoUser)
+        {
+            if(dtoUser != null)
+            {
+                string json = JsonConvert.SerializeObject(dtoUser);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response;
+                try
+                {
+                    response = await httpClient.PutAsync("User", content);
+                }
+                catch
+                {
+                    return false;
+                }
+                return response.IsSuccessStatusCode;
+            }
+            return false;
+        }
     }
 }
