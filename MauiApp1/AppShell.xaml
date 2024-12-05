@@ -26,5 +26,10 @@
     <ShellContent
         ContentTemplate="{DataTemplate view:Settings}"
         Route="Settings" />
-
+    <ShellContent
+        ContentTemplate="{DataTemplate view:Ratings}"
+        Route="Ratings" />
+    <ShellContent
+        ContentTemplate="{DataTemplate view:CreateRatings}"
+        Route="CreateRatings" />
 </Shell>

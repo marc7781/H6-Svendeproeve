@@ -65,7 +65,7 @@ namespace ApiRepository
         public async Task<List<Rating>> GetAllRatingAsync()
         {
             List<DtoRating> dtoRatings = new List<DtoRating>();
-            dtoRatings = await db.Rating.ToListAsync();
+            dtoRatings = await db.Rating.Include(x => x.Sender).ThenInclude(x => x.UserInfo).ToListAsync();
             List<Rating> Ratings = new List<Rating>();
             foreach (DtoRating dtoRating in dtoRatings)
             {
@@ -75,6 +75,15 @@ namespace ApiRepository
                     Ratings = dtoRating.Ratings,
                     Reason = dtoRating.Reason,
                     SenderId = dtoRating.SenderId,
+                    Sender = new User
+                    {
+                        Id = dtoRating.Sender.Id,
+                        UserInfo = new UserInfo
+                        {
+                            Id = dtoRating.Sender.UserInfo.Id,
+                            Name = dtoRating.Sender.UserInfo.Name,
+                        },
+                    },
                     ReceiverId = dtoRating.ReceiverId,
                 };
                 Ratings.Add(rating);

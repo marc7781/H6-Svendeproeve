@@ -29,6 +29,7 @@
             <VerticalStackLayout>
                 <VerticalStackLayout>
                     <Label Text="Hej" Style="{StaticResource Headline}"/>
+                    <Label Text="{Binding user.UserInfo.Name}" Style="{StaticResource Name}"/>
                     <Label Text="Aktive ordre" Style="{StaticResource SubHeadline}"/>
                 </VerticalStackLayout>
                 <CollectionView ItemsSource="{Binding orders}" x:Name="mColloctionView" SelectionMode="Single" SelectedItem="{Binding SelectedOrder}">
@@ -52,14 +53,14 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="10"/>
                                         </Grid.ColumnDefinitions>
-                                        <!--<Border Grid.ColumnSpan="3" Grid.Row="0" Style="{StaticResource ImageBorder}">
-                                            --><!--<Image Source="" Aspect="Fill"/>--><!--
-                                        </Border>-->
-                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Description}" HorizontalOptions="Start"/>
-                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Price}" HorizontalOptions="End"/>
-                                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding Address}"/>
-                                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding Destination}"/>
-                                        <Label Grid.Row="4" Grid.Column="1" Text="{Binding ExpirationDate}"/>
+                                        <Border Grid.ColumnSpan="3" Grid.Row="0" Style="{StaticResource ImageBorder}">
+                                            <Image Source="{Binding ImageUrl}" Aspect="Fill"/>
+                                        </Border>
+                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Description}" WidthRequest="180" HorizontalOptions="Start"/>
+                                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Price, StringFormat='{0:F2} kr.-'}" HorizontalOptions="End"/>
+                                        <Label Grid.Row="2" Grid.Column="1" Text="{Binding Address, StringFormat='Fra {0}'}"/>
+                                        <Label Grid.Row="3" Grid.Column="1" Text="{Binding Destination, StringFormat='Til {0}'}"/>
+                                        <Label Grid.Row="4" Grid.Column="1" Text="{Binding ExpirationDate, StringFormat='Leveres inden den {0:MM/dd/yyyy}'}"/>
                                     </Grid>
                                 </ContentView>
                             </Border>

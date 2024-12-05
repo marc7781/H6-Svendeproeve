@@ -21,15 +21,20 @@
     <Style TargetType="Label" x:Key="Headline">
         <Setter Property="TextColor" Value="White"/>
         <Setter Property="FontSize" Value="40"/>
-        <Setter Property="Padding" Value="0,25,0,25"/>
+        <Setter Property="Padding" Value="0,25,0,0"/>
+    </Style>
+    <Style TargetType="Label" x:Key="Name">
+        <Setter Property="TextColor" Value="White"/>
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Padding" Value="0,0,0,25"/>
     </Style>
     <Style TargetType="Label" x:Key="SubHeadline">
         <Setter Property="TextColor" Value="White"/>
         <Setter Property="FontSize" Value="24"/>
     </Style>
-    <!--<Style TargetType="Border" x:Key="ImageBorder">
+    <Style TargetType="Border" x:Key="ImageBorder">
         
-    </Style>-->
+    </Style>
     <Style TargetType="Border" x:Key="Footer">
         <Setter Property="BackgroundColor" Value="White"/>
         <Setter Property="Stroke">

@@ -1,4 +1,5 @@
 ﻿using FrontendModels;
+using MauiApp1.Views;
 using MauiRepository;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,11 @@ namespace MauiApp1.ViewModels
         public string size { get; set; }
         public int price { get; set; }
         public string name { get; set; }
+        public string imageurl { get; set; }
+        public int number { get; set; }
         OrderRepository orderRepository;
         UserRepository userRepository;
+        private Order Order;
         public Command profile { get; set; }
         public Command ratings { get; set; }
         public Command home { get; set; }
@@ -41,6 +45,7 @@ namespace MauiApp1.ViewModels
         public async void FillOrder(Order order)
         {
             User user = await userRepository.GetUserAsync(order.OwnerId);
+            Order = order;
             id = order.Id;
             name = user.UserInfo.Name;
             description = order.Description;
@@ -49,6 +54,8 @@ namespace MauiApp1.ViewModels
             weight = order.Weight;
             size = order.Size;
             price = order.Price;
+            imageurl = order.ImageUrl;
+            number = user.UserInfo.Phone_number;
             OnPropChanged(nameof(name));
             OnPropChanged(nameof(description));
             OnPropChanged(nameof(from));
@@ -56,10 +63,13 @@ namespace MauiApp1.ViewModels
             OnPropChanged(nameof(weight));
             OnPropChanged(nameof(size));
             OnPropChanged(nameof(price));
+            OnPropChanged(nameof(imageurl));
+            OnPropChanged(nameof(number));
         }
         private async void Report()
         {
 
+            await Shell.Current.Navigation.PushModalAsync(new CreateRatings(Order.OwnerId));
         }
         private async void Complete()
         {

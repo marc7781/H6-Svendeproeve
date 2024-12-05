@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.Ratings"
+             xmlns:ViewModels="clr-namespace:MauiApp1.ViewModels"
+             xmlns:rd="clr-namespace:MauiApp1.Resources.Styles"
+             Title="">
+    <ContentPage.BindingContext>
+        <ViewModels:RatingsViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <rd:RatingsStyle/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid Style="{StaticResource Background}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource Headline}">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span TextColor="White">
+                        <Span.Text>
+                            Anmeldelser
+om dig
+                        </Span.Text>
+                    </Span>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <ScrollView Grid.Row="1" Grid.Column="1">
+            <CollectionView ItemsSource="{Binding ratings}" x:Name="mColloctionView" SelectionMode="None">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" Span="1" VerticalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Style="{StaticResource BorderBackground}">
+                            <ContentView>
+                                <Grid Grid.Row="1" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="40"/>
+                                        <RowDefinition Height="40"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="12"/>
+                                        <ColumnDefinition Width="55"/>
+                                        <ColumnDefinition Width="55"/>
+                                        <ColumnDefinition Width="55"/>
+                                        <ColumnDefinition Width="55"/>
+                                        <ColumnDefinition Width="55"/>
+                                        <ColumnDefinition Width="12"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Grid.Row="0" Grid.ColumnSpan="7" Text="{Binding Reason}" Style="{StaticResource SubHeadline}"/>
+                                    <ImageButton Grid.Row="1" Grid.Column="1" Source="star_empty.png" x:Name="star1" Style="{StaticResource Rating}">
+                                        <ImageButton.Triggers>
+                                            <DataTrigger TargetType="ImageButton" Binding="{Binding Ratings}" Value="1">
+                                                <Setter TargetName="star1" Property="Source" Value="star_full.png"/>
+                                            </DataTrigger>
+                                        </ImageButton.Triggers>
+                                    </ImageButton>
+                                    <ImageButton Grid.Row="1" Grid.Column="2" Source="star_empty.png" x:Name="star2" Style="{StaticResource Rating}">
+                                        <ImageButton.Triggers>
+                                            <DataTrigger TargetType="ImageButton" Binding="{Binding Ratings}" Value="2">
+                                                <Setter TargetName="star1" Property="Source" Value="star_full.png"/>
+                                                <Setter TargetName="star2" Property="Source" Value="star_full.png"/>
+                                            </DataTrigger>
+                                        </ImageButton.Triggers>
+                                    </ImageButton>
+                                    <ImageButton Grid.Row="1" Grid.Column="3" Source="star_empty.png" x:Name="star3" Style="{StaticResource Rating}">
+                                        <ImageButton.Triggers>
+                                            <DataTrigger TargetType="ImageButton" Binding="{Binding Ratings}" Value="3">
+                                                <Setter TargetName="star1" Property="Source" Value="star_full.png"/>
+                                                <Setter TargetName="star2" Property="Source" Value="star_full.png"/>
+                                                <Setter TargetName="star3" Property="Source" Value="star_full.png"/>
+                                            </DataTrigger>
+                                        </ImageButton.Triggers>
+                                    </ImageButton>
+                                    <ImageButton Grid.Row="1" Grid.Column="4" Source="star_empty.png" x:Name="star4" Style="{StaticResource Rating}">
+                                        <ImageButton.Triggers>
+                                            <DataTrigger TargetType="ImageButton" Binding="{Binding Ratings}" Value="4">
+                                                <Setter TargetName="star1" Property="Source" Value="star_full.png"/>
+                                                <Setter TargetName="star2" Property="Source" Value="star_full.png"/>
+                                                <Setter TargetName="star3" Property="Source" Value="star_full.png"/>
+                                                <Setter TargetName="star4" Property="Source" Value="star_full.png"/>
+                                            </DataTrigger>
+                                        </ImageButton.Triggers>
+                                    </ImageButton>
+                                    <ImageButton Grid.Row="1" Grid.Column="5" Source="star_empty.png" x:Name="star5" Style="{StaticResource Rating}">
+                                        <ImageButton.Triggers>
+                                            <DataTrigger TargetType="ImageButton" Binding="{Binding Ratings}" Value="5">
+                                                <Setter TargetName="star1" Property="Source" Value="star_full.png"/>
+                                                <Setter TargetName="star2" Property="Source" Value="star_full.png"/>
+                                                <Setter TargetName="star3" Property="Source" Value="star_full.png"/>
+                                                <Setter TargetName="star4" Property="Source" Value="star_full.png"/>
+                                                <Setter TargetName="star5" Property="Source" Value="star_full.png"/>
+                                            </DataTrigger>
+                                        </ImageButton.Triggers>
+                                    </ImageButton>
+                                    <Label Grid.Row="2" Grid.ColumnSpan="7" Text="{Binding Sender.UserInfo.Name, StringFormat='Fra {0}'}" Style="{StaticResource from}"/>
+                                </Grid>
+                            </ContentView>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+        <VerticalStackLayout Grid.Row="2" Grid.ColumnSpan="3">
+            <Border Style="{StaticResource Footer}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="50"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="1" ImageSource="star.png" Command="{Binding gotoratings}" Style="{StaticResource FooterButton}"/>
+                    <Button Grid.Column="2" ImageSource="profile.png" Command="{Binding profile}" Style="{StaticResource FooterButton}"/>
+                    <Button Grid.Column="3" ImageSource="market.png" Command="{Binding home}" Style="{StaticResource FooterButton}"/>
+                    <Button Grid.Column="4" ImageSource="setting.png" Command="{Binding settings}" Style="{StaticResource FooterButton}"/>
+                </Grid>
+            </Border>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

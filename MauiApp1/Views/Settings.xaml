@@ -53,7 +53,7 @@ oplysninger
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="45"/>
                         <RowDefinition Height="50"/>
-                        <RowDefinition Height="45"/>
+                        <RowDefinition Height="60"/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10"/>
@@ -61,17 +61,17 @@ oplysninger
                         <ColumnDefinition Width="10"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Row="0" Grid.Column="1" Text="Mail" Style="{StaticResource SubHeadline}"/>
-                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding name}" Style="{StaticResource Input}"/>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding mail}" Style="{StaticResource Input}"/>
                     <Label Grid.Row="2" Grid.Column="1" Text="Telefonnummer" Style="{StaticResource SubHeadline}"/>
                     <Entry Grid.Row="3" Grid.Column="1" Text="{Binding nummer}" Style="{StaticResource Input}"/>
                     <Label Grid.Row="4" Grid.Column="1" Text="Lastbil type" Style="{StaticResource SubHeadline}"/>
-                    <Picker Grid.Row="5" Grid.Column="1" ItemsSource="{Binding trucks}" Title="Vælg lastbil type" ItemDisplayBinding="{Binding Trucktype}" SelectedItem="{Binding SelectedTruck}"/>
+                    <Picker Grid.Row="5" Grid.Column="1" ItemsSource="{Binding trucks}" Title="Vælg lastbil type" ItemDisplayBinding="{Binding Trucktype}" SelectedItem="{Binding SelectedTruck}" FontSize="20"/>
                     <Label Grid.Row="6" Grid.Column="1" Text="Password" Style="{StaticResource SubHeadline}"/>
                     <Entry Grid.Row="7" Grid.Column="1" Text="{Binding password}" IsPassword="True" Style="{StaticResource Input}"/>
                     <Label Grid.Row="8" Grid.Column="1" Text="Gentag password" Style="{StaticResource SubHeadline}"/>
                     <Entry Grid.Row="9" Grid.Column="1" Text="{Binding repeatPassword}" IsPassword="True" Style="{StaticResource Input}"/>
-                    <Button Grid.Row="11" Grid.Column="1" WidthRequest="100" HorizontalOptions="Start" Text="Log ud" Command="{Binding logout}" Style="{StaticResource LogoutButton}"/>
-                    <Button Grid.Row="11" Grid.Column="1" WidthRequest="100" HorizontalOptions="End" Text="Gem" Command="{Binding save}" Style="{StaticResource SaveButton}"/>
+                    <Button Grid.Row="11" Grid.Column="1" WidthRequest="120" HorizontalOptions="Start" Text="Log ud" Command="{Binding logout}" Style="{StaticResource LogoutButton}"/>
+                    <Button Grid.Row="11" Grid.Column="1" WidthRequest="120" HorizontalOptions="End" Text="Gem" Command="{Binding save}" Style="{StaticResource SaveButton}"/>
                 </Grid>
             </Border>
         </VerticalStackLayout>

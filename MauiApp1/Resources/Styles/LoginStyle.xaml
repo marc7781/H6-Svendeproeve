@@ -43,10 +43,11 @@
         <Setter Property="FontSize" Value="20"/>
     </Style>
     <Style TargetType="Label" x:Key="NoAccount">
-        
+        <Setter Property="Margin" Value="10,0,10,0"/>
     </Style>
     <Style TargetType="Label" x:Key="SignupButton">
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="TextDecorations" Value="Underline"/>
+        <Setter Property="Margin" Value="10,0,10,0"/>
     </Style>
 </ResourceDictionary>

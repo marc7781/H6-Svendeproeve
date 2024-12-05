@@ -1,6 +1,9 @@
 ﻿using CommunityToolkit.Maui.Views;
 using FrontendModels;
+using MauiApp1.Views;
 using MauiRepository;
+using Newtonsoft.Json;
+using Plugin.LocalNotification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,22 +29,27 @@ namespace MauiApp1.ViewModels
             changePrice = new Command(ChangePrice);
         }
 
-        private async void Confirm()
+        private async void Confirm(object result)
         {
+            Popup popup = result as Popup;
+            Order.DriverId = Convert.ToInt32(await SecureStorage.Default.GetAsync("userId"));
             if (newPrice == false)
             {
-                Order.DriverId = Convert.ToInt32(await SecureStorage.Default.GetAsync("userId"));
-                await OrderRepository.UpdateOrderAsync(Order);
-                await Shell.Current.GoToAsync("//Ordre");
+                Order.Pending = false;
+                await OrderRepository.UpdateDriverOrderAsync(Order);
+                SendNotification();
+                popup.Close();
             }
             else
             {
-                //sende mail til kunde
+                Order.Pending = true;
+                await OrderRepository.UpdatePriceOrderAsync(Order);
+                popup.Close();
             }
         }
         private async void ChangePrice()
         {
-            if (price > 0)
+            if (price != Order.Price && price != 0)
             {
                 newPrice = true;
             }
@@ -51,6 +59,26 @@ namespace MauiApp1.ViewModels
             }
             OnPropChanged(nameof(price));
             OnPropChanged(nameof(newPrice));
+        }
+        private void SendNotification()
+        {
+            string json = JsonConvert.SerializeObject(Order);
+            var request = new NotificationRequest
+            {
+                NotificationId = 1000,
+                Title = "Ordren er nu gået i gennem",
+                Subtitle = "",
+                ReturningData = json,
+                Description = "",
+                BadgeNumber = 42,
+                Schedule = new NotificationRequestSchedule
+                {
+                    NotifyTime = DateTime.Now.AddSeconds(5),
+                    NotifyRepeatInterval = TimeSpan.FromMinutes(1),
+                    RepeatType = NotificationRepeat.TimeInterval,
+                }
+            };
+            LocalNotificationCenter.Current.Show(request);
         }
     }
 }

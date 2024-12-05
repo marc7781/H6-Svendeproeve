@@ -8,7 +8,8 @@
              xmlns:ViewModels="clr-namespace:MauiApp1.ViewModels"
              x:DataType="ViewModels:FindOrderPopUpViewModel"
              Size="375,465"
-             Color="Transparent">
+             Color="Transparent"
+             x:Name="this">
     <mct:Popup.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,11 +21,11 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="150"/>
-                <RowDefinition Height="70"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="45"/>
-                <RowDefinition Height="120"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="105"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" Style="{StaticResource Headline}">
                 <Label.FormattedText>
@@ -40,14 +41,14 @@ leveret
                 </Label.FormattedText>
             </Label>
             <Label Grid.Row="2" Text="Angiv din pris" Style="{StaticResource SubHeadline}"/>
-            <Entry Grid.Row="3" x:Name="Input" Keyboard="Numeric" Placeholder="" Text="{Binding price}">
+            <Entry Grid.Row="3" x:Name="Input" Keyboard="Numeric" Placeholder="" Text="{Binding price}" Style="{StaticResource NewPrice}">
                 <Entry.Behaviors>
                     <toolkit:EventToCommandBehavior 
                         EventName="PropertyChanged" Command="{Binding changePrice}"/>
                 </Entry.Behaviors>
             </Entry>
             <Button Grid.Row="5" HorizontalOptions="Start" Text="Gå tilbage" WidthRequest="130" Clicked="Button_Clicked" Style="{StaticResource Buttons}"/>
-            <Button Grid.Row="5" HorizontalOptions="End" Text="Godkend" WidthRequest="130" Command="{Binding confirm}" Style="{StaticResource Buttons}">
+            <Button Grid.Row="5" HorizontalOptions="End" Text="Godkend" WidthRequest="130" Command="{Binding confirm}" CommandParameter="{x:Reference this}" Style="{StaticResource Buttons}">
                 <Button.Triggers>
                     <MultiTrigger TargetType="Button">
                         <MultiTrigger.Conditions>

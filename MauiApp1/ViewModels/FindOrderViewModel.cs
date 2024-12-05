@@ -10,7 +10,9 @@ using CommunityToolkit.Maui.Views;
 using FrontendModels;
 using MauiApp1.Views;
 using MauiRepository;
+using Plugin.LocalNotification;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace MauiApp1.ViewModels
 {
@@ -33,6 +35,7 @@ namespace MauiApp1.ViewModels
             ratings = new Command(Ratings);
             settings = new Command(Settings);
             tagOrder = new Command<Order>(TagOrder);
+            LocalNotificationCenter.Current.NotificationActionTapped += Current_NotificationActionTapped;
         }
         private async void GetOrder()
         {
@@ -70,6 +73,13 @@ namespace MauiApp1.ViewModels
         private async void TagOrder(Order order)
         {
             await Shell.Current.ShowPopupAsync(new FindOrderPopUp(order));
+        }
+        private async void Current_NotificationActionTapped(Plugin.LocalNotification.EventArgs.NotificationActionEventArgs e)
+        {
+            Order noticationOrder;
+            string test = e.Request.ReturningData;
+            noticationOrder = JsonConvert.DeserializeObject<Order>(test);
+            await Shell.Current.Navigation.PushModalAsync(new InspectOrder(noticationOrder));
         }
         private async void Profile()
         {
