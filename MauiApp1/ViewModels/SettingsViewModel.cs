@@ -12,7 +12,7 @@ namespace MauiApp1.ViewModels
 {
     public class SettingsViewModel : BaseViewModels
     {
-        public string name {  get; set; }
+        public string mail {  get; set; }
         public string nummer { get; set; }
         public string password { get; set; }
         public string repeatPassword { get; set; }
@@ -56,7 +56,7 @@ namespace MauiApp1.ViewModels
         {
             int id = Convert.ToInt32(await SecureStorage.GetAsync("userId"));
             user = await userRepository.GetUserAsync(id);
-            name = user.UserInfo.Name;
+            mail = user.UserInfo.Email;
             nummer = user.UserInfo.Phone_number.ToString();
             trucks = await truckRepository.GetAllTrucksAsync();
             if (user.TruckTypeId > 0)
@@ -71,13 +71,13 @@ namespace MauiApp1.ViewModels
                 }
             }
             OnPropChanged(nameof(trucks));
-            OnPropChanged(nameof(name));
+            OnPropChanged(nameof(mail));
             OnPropChanged(nameof(nummer));
         }
         private async void Save()
         {
             user.TruckTypeId = SelectedTruck.Id;
-            user.UserInfo.Name = name;
+            user.UserInfo.Email = mail;
             user.UserInfo.Phone_number = Convert.ToInt32(nummer);
             if (password != null && repeatPassword != null && password == repeatPassword)
             {

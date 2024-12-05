@@ -16,6 +16,7 @@ namespace MauiApp1.ViewModels
     {
         OrderRepository orderRepository { get; set; }
         UserRepository userRepository { get; set; }
+        public User user { get; set; }
         public ObservableCollection<Order> orders { get; set; }
         public List<Order> allOrders { get; set; }
         Order selectedOrder;
@@ -48,11 +49,13 @@ namespace MauiApp1.ViewModels
         {
             int userid = Convert.ToInt32(await SecureStorage.GetAsync("userId"));
             orders = new ObservableCollection<Order>();
+            user = await userRepository.GetUserAsync(userid);
             allOrders = await orderRepository.GetOrdersForDriverAsync(userid);
             for (int i = 0; i < allOrders.Count; i++)
             {
                 orders.Add(allOrders[i]);
             }
+            OnPropChanged(nameof(user));
             OnPropChanged(nameof(orders));
         }
 

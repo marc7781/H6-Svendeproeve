@@ -89,7 +89,7 @@ namespace ApiRepository
         public async Task<List<Order>> GetAllOrdersFromDriverId(int driverId)
         {
             List<DtoOrder> dtoOrders = new List<DtoOrder>();
-            dtoOrders = await db.Orders.Where(x => x.DriverId == driverId).ToListAsync();
+            dtoOrders = await db.Orders.Where(x => (x.DriverId == driverId) && (x.Pending == false)).ToListAsync();
             List<Order> orders = new List<Order>();
             foreach (DtoOrder dtoOrder in dtoOrders)
             {
