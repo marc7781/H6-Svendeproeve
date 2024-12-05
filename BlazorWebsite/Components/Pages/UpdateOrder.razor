@@ -1,0 +1,56 @@
+﻿@page "/UpdateOrder/{Id:int}"
+@rendermode InteractiveServer
+
+<PageTitle>Redigere ordre</PageTitle>
+
+<div class="container">
+    <div class="header">
+        <h2 class="header-text">Opret en ordre</h2>
+    </div>
+    <div class="foreground">
+        @if (order != null)
+        {
+            <div class="input-container">
+                <h6 class="red-text">Giv en kort beskrivelse af hvad der skal flyttes</h6>
+                <input type="text" class="input" @bind-value="order.Description" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Hvor skal varen hen</h6>
+                <input type="text" class="input" @bind-value="order.Destination" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Hvor skal varen hentes fra</h6>
+                <input type="text" class="input" @bind-value="order.Address" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Hvor meget vejre varen i kilogram</h6>
+                <input type="number" class="input" @bind-value="order.Weight" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Angiv størrelsen på varen sådan her (længde*bredde*højde) i cm</h6>
+                <input type="text" class="input" @bind-value="order.Size" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Angiv prisen du vil give for at få varen leveret i kroner</h6>
+                <input type="number" class="input" @bind-value="order.Price" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Sæt ind et billede af varen</h6>
+                <input type="text" class="input" @bind-value="order.ImageUrl" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Angiv et tidspunkt varen skal være leveret inden</h6>
+                <input type="date" class="input" @bind-value="order.ExpirationDate" />
+            </div>
+            <div class="input-container">
+                <h6 class="red-text">Specificer en type lastvogn der skal levere varen</h6>
+                <input type="text" class="input" @bind-value="order.TruckType.Trucktype" />
+            </div>
+        }
+        <div class="btn-container">
+            <button class="btn">Gå tilbage</button>
+            <button class="btn" @onclick="SubmitChanges">Opret ordren</button>
+        </div>
+    </div>
+
+</div>
