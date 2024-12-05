@@ -27,6 +27,24 @@ namespace WebApi.Controllers
                 return NotFound();
             }
         }
+        [HttpGet("UsersRatings/{userid}")]
+        public async Task<IActionResult> GetAllUsersRatingsAsync(int userId)
+        {
+            List<Rating> usersRatings = null;
+            try
+            {
+               usersRatings = await repo.GetAllUsersRatingsAsync(userId);
+            }
+            catch
+            {
+                return BadRequest();
+            }
+            if(usersRatings != null)
+            {
+                return Ok(usersRatings);
+            }
+            return NotFound();
+        }
         [HttpGet]
         public async Task<IActionResult> GetAllRatingAsync()
         {

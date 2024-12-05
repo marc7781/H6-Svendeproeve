@@ -1,0 +1,27 @@
+﻿@page "/watchratings"
+@rendermode InteractiveServer
+
+<PageTitle>Se dine anmeldelse</PageTitle>
+
+<div class="container">
+    @if (usersRatings != null)
+    {
+        <div class="header">
+            @if (usersRatings.Count == 0)
+            {
+                <h2 class="header-text">Du har ikke fået noget anmeldelser endnu</h2>
+            }
+            else
+            {
+                <h2 class="header-text">Anmeldelser du har fået</h2>
+            }
+            <a @onclick="GoToMainPage">Se dine aktive ordre her</a>
+        </div>
+        <div class="ratings-container">
+            @foreach (Rating rating in usersRatings) 
+            {
+                <RatingComp Reason="@rating.Reason" Rating="@rating.Ratings" SenderName="@rating.Sender.UserInfo.Name"/>
+            }
+        </div>
+    }
+</div>

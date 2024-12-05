@@ -10,9 +10,11 @@ namespace WebApi.Controllers
     public class OrderController : ControllerBase
     {
         OrderRepository repo { get; set; }
+        MailRepository mailRepository { get; set; }
         public OrderController()
         {
             repo = new OrderRepository();
+            mailRepository = new MailRepository();
         }
         [HttpGet("{orderId}")]
         public async Task<IActionResult> GetOneOrderAsync(int orderId)
@@ -79,7 +81,19 @@ namespace WebApi.Controllers
         {
             try
             {
-                return Ok(await repo.UpdateOrderAsync(order));
+                if(await repo.UpdateOrderAsync(order))
+                {
+                    bool checkIfSucces = await mailRepository.SendOrderTakenAsync(order);
+                    if(await mailRepository.SendOrderTakenAsync(order))
+                    {
+                        return Ok(false);
+                    }
+                    return Ok(true);
+                }
+                else
+                {
+                    return BadRequest(false);
+                }
             }
             catch
             {

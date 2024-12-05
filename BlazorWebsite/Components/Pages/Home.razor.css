@@ -12,6 +12,13 @@
     color: white;
     height: 7vh;
 }
+h3 {
+    color: white;
+}
+a {
+    cursor: pointer;
+    border-bottom: solid 2px;
+}
 .info-text {
     display: flex;
     flex-direction: row;
@@ -108,4 +115,8 @@ p {
     font-weight: bold;
     color: white;
     height: 50px;
+}
+.clickable-span {
+    cursor: pointer;
+    border-bottom: solid 2px;
 }

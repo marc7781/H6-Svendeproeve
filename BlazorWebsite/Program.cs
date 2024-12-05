@@ -10,6 +10,7 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddSingleton<IOrderRepository, OrderRepository>();
 builder.Services.AddSingleton<IUserRepository, UserRepository>();
+builder.Services.AddSingleton<IRatingRepository, RatingRepository>();
 
 var app = builder.Build();
 

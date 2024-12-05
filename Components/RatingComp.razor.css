@@ -1,0 +1,27 @@
+﻿.foreground {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    background-color: white;
+    min-height: 25vh;
+    width: 100%;
+    border-radius: 50px;
+    margin-bottom: 3%;
+    padding: 15px 50px 15px 50px;
+}
+.top-container {
+
+}
+.bottom-container {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between
+}
+.stars {
+
+}
+p {
+    font-size: 20px;
+}

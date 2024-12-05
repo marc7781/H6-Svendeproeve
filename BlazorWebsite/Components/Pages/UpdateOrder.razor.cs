@@ -12,6 +12,8 @@ namespace BlazorWebsite.Components.Pages
         private Order order { get; set; }
         [Parameter]
         public int Id { get; set; }
+        private bool updateFailed { get; set; }
+        private string errorMsg { get; set; }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if(firstRender)
@@ -70,13 +72,30 @@ namespace BlazorWebsite.Components.Pages
             {
                 if(await orderRepo.UpdateOrderAsync(order))
                 {
-                    //it worked
+                    navigationManager.NavigateTo("/");
                 }
                 else
                 {
-                    //it didn't
+                    await ShowErrorMessageAsync("Kunne ikke opdater ordren på vores ende, prøv igen");
                 }
             }
+            else
+            {
+                await ShowErrorMessageAsync("Informationen på ordren er ikke korrekt");
+            }
+        }
+        private async Task ShowErrorMessageAsync(string message)
+        {
+            errorMsg = message;
+            updateFailed = true;
+            StateHasChanged();
+            ErrorTimeMessageAsync();
+        }
+        private async void ErrorTimeMessageAsync()
+        {
+            await Task.Delay(5000);
+            updateFailed = false;
+            StateHasChanged();
         }
     }
 }

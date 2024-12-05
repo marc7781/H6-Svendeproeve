@@ -3,6 +3,13 @@
 
 <PageTitle>Log In</PageTitle>
 
+@if (logInFailed)
+{
+    <div class="alert alert-danger" role="alert">
+        <p>@errorMsg</p>
+    </div>
+}
+
 <div class="container">
     <div class="header">
         <h2 class="headeer-text">Velkommen, log in her</h2>
@@ -17,7 +24,7 @@
             <input type="password" class="input" @bind-value="password" />
         </div>
         <div class="btn-container">
-            <button class="btn">Gå til sign up</button>
+            <button class="btn" @onclick="GoToSignUp">Gå til sign up</button>
             <button class="btn" @onclick="LogUserInAsync">Log in</button>
         </div>
     </div>

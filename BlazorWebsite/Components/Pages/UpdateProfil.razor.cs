@@ -9,6 +9,8 @@ namespace BlazorWebsite.Components.Pages
     partial class UpdateProfil
     {
         private User user { get; set; }
+        private bool updateFailed { get; set; }
+        private string errorMsg { get; set; }
         private int phoneNumber { get; set; }
         private string address { get; set; }
         private string currentMail { get; set; }
@@ -73,31 +75,78 @@ namespace BlazorWebsite.Components.Pages
             }
             return false;
         }
+        private void GoBackAsync()
+        {
+            navigationManager.NavigateTo("/");
+        }
+
         private async void SubmitUpdate()
         {
-            if (ValidateInfo())
+            if (!ValidateInfo())
             {
-                if (await userRepo.LogInUserAsync(user.UserInfo.Email, currentPassword) != null)
+                await ShowErrorMessageAsync("Felterne er ikke udfyldt korrekt");
+                return;
+            }
+
+            if (await userRepo.LogInUserAsync(user.UserInfo.Email, currentPassword) == null)
+            {
+                await ShowErrorMessageAsync("Kodeord passer ikke til brugeren");
+                return;
+            }
+
+            user.UserInfo.Email = currentMail;
+            user.UserInfo.Address = address;
+            user.UserInfo.Phone_number = phoneNumber;
+
+            bool updateSuccess = false;
+            if (ValidateNewPasswords())
+            {
+                user.UserCredentials.Password = newPassword;
+                try
                 {
-                    user.UserInfo.Email = currentMail;
-                    user.UserInfo.Address = address;
-                    user.UserInfo.Phone_number = phoneNumber;
-                    bool checkIfSucces = false;
-                    if(ValidateNewPasswords())
-                    {
-                        user.UserCredentials.Password = newPassword;
-                        checkIfSucces = await userRepo.UpdateUserAndPasswordAsync(user);
-                    }
-                    else
-                    {
-                        checkIfSucces = await userRepo.UpdateUserAsync(user);
-                    }
-                    if(checkIfSucces)
-                    {
-                        //it worked
-                    }
+                    updateSuccess = await userRepo.UpdateUserAndPasswordAsync(user);
+                }
+                catch
+                {
+                    await ShowErrorMessageAsync("Der skete en fejl på vores ende, prøv igen");
+                    return;
                 }
             }
+            else
+            {
+                try
+                {
+                    updateSuccess = await userRepo.UpdateUserAsync(user);
+                }
+                catch
+                {
+                    await ShowErrorMessageAsync("Der skete en fejl på vores ende, prøv igen");
+                    return;
+                }
+            }
+
+            if (!updateSuccess)
+            {
+                await ShowErrorMessageAsync("Kunne ikke opdater informationen på vores ende, prøv igen");
+            }
+            else
+            {
+                navigationManager.NavigateTo("/");
+            }
         }
+        private async Task ShowErrorMessageAsync(string message)
+        {
+            errorMsg = message;
+            updateFailed = true;
+            StateHasChanged();
+            ErrorTimeMessageAsync();
+        }
+        private async void ErrorTimeMessageAsync()
+        {
+            await Task.Delay(5000);
+            updateFailed = false;
+            StateHasChanged();
+        }
+
     }
 }

@@ -3,11 +3,18 @@
 @rendermode InteractiveServer
 <PageTitle>Profil</PageTitle>
 
+
+@if(activateInspector)
+{
+    <InspectDriverComp CloseInspectorEvent="CloseInspector" WriteRatingEvent="GoToWriteRating" User="clickedDriver" AverageRating="averageRating" />
+}
+
 <div class="container">
     @if (user != null)
     {
         <div class="header">
             <h2 class="header-text">Hej @user.UserInfo.Name</h2>
+            <a @onclick="GoToWatchRatings">Se dine anmeldelser her</a>
         </div>
         <div class="order-container">
             <div class="info-text">
@@ -33,12 +40,17 @@
                             </div>
                         </div>
                         <div class="right-info-container">
-                            @if(activeOrders[i].Driver != null)
+                            @if (activeOrders[i].Driver != null)
                             {
-                                <p>Ordre taget af @activeOrders[i].Driver.UserInfo.Name</p>
+                                int driverId = (int)activeOrders[i].DriverId;
+                                <p>Ordre taget af 
+                                    <span class="clickable-span" @onclick="() => InspectDriverAsync(driverId)">
+                                        @activeOrders[i].Driver.UserInfo.Name
+                                    </span>
+                                </p>
                                 <p>for @(activeOrders[i].Price) kr.- </p>
                             }
-                            else 
+                            else
                             {
                                 <div class="top-container">
                                     <p>Ingen har taget imod ordren endnu</p>

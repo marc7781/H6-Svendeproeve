@@ -1,0 +1,49 @@
+﻿@page "/createrating/{Id:int}"
+@rendermode InteractiveServer
+
+<PageTitle>Skriv en anmeldelse</PageTitle>
+
+
+<div class="container">
+    <div class="header">
+        @if (driver != null)
+        {
+            <h2 class="header-text">Skriv en anmeldelse om @driver.UserInfo.Name</h2>
+        }
+    </div>
+    <div class="foreground">
+        <div class="input-container">
+            @if (rating != null)
+            {
+                <div class="reason-input-container">
+                    <h3>Begrundelse</h3>
+                    <textarea placeholder="Skriv begrundelse" @bind="rating.Reason"></textarea>
+                </div>
+                <div class="rating-input-container">
+                    <h3>Mængde stjerner</h3>
+                    <div class="stars-container">
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            int indexNumber = i;
+                            if (i < rating.Ratings)
+                            {
+                                <img @onclick="() => ChangeRatingValue(indexNumber)" src="images/FilledStar.png" />
+                            }
+                            else
+                            {
+                                <img @onclick="() => ChangeRatingValue(indexNumber)" src="images/EmptyStar.png" />
+                            }
+                        }
+
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="btn-container">
+            <button class="btn" @onclick="CancelRating">Annullere</button>
+            <button class="btn" @onclick="CreateRatingAsync">Send anmeldelse</button>
+        </div>
+    </div>
+
+</div>
+

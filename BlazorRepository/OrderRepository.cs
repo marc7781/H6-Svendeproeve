@@ -97,6 +97,22 @@ namespace BlazorRepository
                 OwnerId = dto.OwnerId,
                 TruckTypeId = dto.TruckTypeId
             };
+            if(dto.Driver != null)
+            {
+                order.DriverId = dto.Driver.Id;
+                order.Driver = new User
+                {
+                    Id = dto.Driver.Id,
+                    UserInfo = new UserInfo
+                    {
+                        Id = dto.Driver.UserInfo.Id,
+                        Name = dto.Driver.UserInfo.Name,
+                        Phone_number = dto.Driver.UserInfo.Phone_number,
+                        Email = dto.Driver.UserInfo.Email,
+                        Address = dto.Driver.UserInfo.Address,
+                    }
+                };
+            }
             return order;
         }
 

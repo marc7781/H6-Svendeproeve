@@ -2,6 +2,13 @@
 @rendermode InteractiveServer
 <PageTitle>Sign Up</PageTitle>
 
+@if (signUpFailed)
+{
+    <div class="alert alert-danger" role="alert">
+        <p>@errorMsg</p>
+    </div>
+}
+
 <div class="container">
     <div class="header">
         <h2 class="headeer-text">Opret en konto</h2>
@@ -35,7 +42,7 @@
             </div>
         }
         <div class="btn-container">
-            <button class="btn">Gå til log in</button>
+            <button class="btn" @onclick="GoToLogIn">Gå til log in</button>
             <button class="btn" @onclick="SignUserUp">Opret konto</button>
         </div>
     </div>

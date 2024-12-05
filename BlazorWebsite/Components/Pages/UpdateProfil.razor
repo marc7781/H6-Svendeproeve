@@ -2,6 +2,12 @@
 @rendermode InteractiveServer
 
 <PageTitle>Redigere profil</PageTitle>
+@if (updateFailed)
+{
+    <div class="alert alert-danger" role="alert">
+        <p>@errorMsg</p>
+    </div>
+}
 
 <div class="container">
     <div class="header">
@@ -36,7 +42,7 @@
             </div>
         }
         <div class="btn-container">
-            <button class="btn">Gå tilbage</button>
+            <button class="btn" @onclick="GoBackAsync">Gå tilbage</button>
             <button class="btn" @onclick="SubmitUpdate">Gem ændringerne</button>
         </div>
     </div>

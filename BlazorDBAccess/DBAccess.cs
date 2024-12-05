@@ -159,5 +159,41 @@ namespace BlazorDBAccess
             }
             return false;
         }
+        public async Task<bool> CreateRatingAsync(DtoRating dtoRating)
+        {
+            if (dtoRating != null)
+            {
+                string json = JsonConvert.SerializeObject(dtoRating);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response;
+                try
+                {
+                    response = await httpClient.PostAsync("Rating", content);
+                }
+                catch
+                {
+                    return false;
+                }
+                return response.IsSuccessStatusCode;
+            }
+            return false;
+        }
+        public async Task<List<DtoRating>> GetUsersRatingFromIdAsync(int id)
+        {
+            HttpResponseMessage response;
+            try
+            {
+                response = await httpClient.GetAsync($"Rating/UsersRatings/{id}");
+            }
+            catch
+            {
+                return null;
+            }
+            if (response.IsSuccessStatusCode)
+            {
+                return JsonConvert.DeserializeObject<List<DtoRating>>(await response.Content.ReadAsStringAsync());
+            }
+            return null;
+        }
     }
 }

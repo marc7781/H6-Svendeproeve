@@ -11,6 +11,8 @@ namespace BlazorWebsite.Components.Pages
         private User user { get; set; }
         private string mail { get; set; }
         private string password { get; set; }
+        private bool logInFailed { get; set; }
+        private string errorMsg { get; set; }
         [Inject]
         protected IUserRepository userRepo { get; set; }
         private LocalStorageHelper localStorageHelper;
@@ -42,9 +44,22 @@ namespace BlazorWebsite.Components.Pages
             }
 
         }
-        private async Task RunErrorMsgAsync(string msg)
+        private async Task RunErrorMsgAsync(string message)
         {
-
-        } 
+            errorMsg = message;
+            logInFailed = true;
+            StateHasChanged();
+            ErrorTimeMessageAsync();
+        }
+        private async void ErrorTimeMessageAsync()
+        {
+            await Task.Delay(5000);
+            logInFailed = false;
+            StateHasChanged();
+        }
+        private void GoToSignUp()
+        {
+            navigationManager.NavigateTo("/signup");
+        }
     }
 }

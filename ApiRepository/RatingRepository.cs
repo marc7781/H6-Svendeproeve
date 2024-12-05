@@ -32,6 +32,36 @@ namespace ApiRepository
             };
             return rating;
         }
+        public async Task<List<Rating>> GetAllUsersRatingsAsync(int userId)
+        {
+            List<DtoRating> dtoRatings = await db.Rating.Where(x => x.Receiver.Id == userId).Include(x => x.Sender).ThenInclude(x => x.UserInfo).ToListAsync();
+            if(dtoRatings != null)
+            {
+                List<Rating> usersRatings = new List<Rating>();
+                foreach (DtoRating dto in dtoRatings)
+                {
+                    Rating rating = new Rating
+                    {
+                        Id = dto.Id,
+                        Ratings = dto.Ratings,
+                        Reason = dto.Reason,
+                        SenderId = dto.SenderId,
+                        Sender = new User
+                        {
+                            Id = dto.Sender.Id,
+                            UserInfo = new UserInfo
+                            {
+                                Name = dto.Sender.UserInfo.Name
+                            }
+                        },
+                        ReceiverId = dto.ReceiverId,
+                    };
+                    usersRatings.Add(rating);
+                }
+                return usersRatings;
+            }
+            return null;
+        } 
         public async Task<List<Rating>> GetAllRatingAsync()
         {
             List<DtoRating> dtoRatings = new List<DtoRating>();

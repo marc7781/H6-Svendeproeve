@@ -1,0 +1,20 @@
+﻿body {
+    overflow: scroll;
+}
+.header {
+    color: white;
+}
+
+.container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.ratings-container {
+    width: 100%;
+}
+a {
+    cursor: pointer;
+    border-bottom: solid 2px;
+}

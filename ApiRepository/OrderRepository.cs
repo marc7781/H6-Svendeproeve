@@ -63,7 +63,7 @@ namespace ApiRepository
         public async Task<List<Order>> GetAllOrdersFromOwnerId(int ownerId)
         {
             List<DtoOrder> dtoOrders = new List<DtoOrder>();
-            dtoOrders = await db.Orders.Where(x => x.OwnerId == ownerId).ToListAsync();
+            dtoOrders = await db.Orders.Where(x => x.OwnerId == ownerId).Include(x => x.Driver).ThenInclude(x => x.UserInfo).ToListAsync();
             List<Order> orders = new List<Order>();
             foreach (DtoOrder dtoOrder in dtoOrders)
             {
@@ -82,6 +82,22 @@ namespace ApiRepository
                     DriverId = dtoOrder.DriverId,
                     TruckTypeId = dtoOrder.TruckTypeId,
                 };
+                if(dtoOrder.Driver != null)
+                {
+                    order.Driver = new User
+                    {
+                        Id = dtoOrder.Driver.Id,
+                        UserInfo = new UserInfo
+                        {
+                            Id = dtoOrder.Driver.UserInfo.Id,
+                            Address = dtoOrder.Driver.UserInfo.Address,
+                            Email = dtoOrder.Driver.UserInfo.Email,
+                            Phone_number = dtoOrder.Driver.UserInfo.Phone_number,
+                            Name = dtoOrder.Driver.UserInfo.Name,
+                        },
+
+                    };
+                }
                 orders.Add(order);
             }
             return orders;

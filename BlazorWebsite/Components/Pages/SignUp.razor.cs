@@ -1,4 +1,5 @@
 ﻿using BlazorRepository;
+using BlazorWebsite.Utils;
 using FrontendModels;
 using Microsoft.AspNetCore.Components;
 
@@ -9,8 +10,11 @@ namespace BlazorWebsite.Components.Pages
         private User user { get; set; }
         private string password { get; set; }
         private string repeatedPassword { get; set; }
+        private bool signUpFailed { get; set; }
+        private string errorMsg { get; set; }
         [Inject]
         protected IUserRepository userRepo {  get; set; }
+        private LocalStorageHelper localStorageHelper;
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if(firstRender)
@@ -52,13 +56,47 @@ namespace BlazorWebsite.Components.Pages
                 }
                 if (await userRepo.SignUserUpAsync(user))
                 {
-                    //it worked
+                    localStorageHelper = new LocalStorageHelper(JS);
+                    try
+                    {
+                        user = await userRepo.LogInUserAsync(user.UserInfo.Email, password);
+                    }
+                    catch (Exception e)
+                    {
+                        await RunErrorMsgAsync(e.Message);
+                    }
+                    if (user != null)
+                    {
+                        await localStorageHelper.SaveAsync("userId", user.Id.ToString());
+                        navigationManager.NavigateTo("/");
+                    }
                 }
                 else
                 {
-                    //it didn't work
+                    await RunErrorMsgAsync("Kunne ikke oprette bruger, prøv igen");
                 }
             }
+            else
+            {
+                await RunErrorMsgAsync("Oplysningerne er ikke godkendt");
+            }
+        }
+        private async Task RunErrorMsgAsync(string message)
+        {
+            errorMsg = message;
+            signUpFailed = true;
+            StateHasChanged();
+            ErrorTimeMessageAsync();
+        }
+        private async void ErrorTimeMessageAsync()
+        {
+            await Task.Delay(5000);
+            signUpFailed = false;
+            StateHasChanged();
+        }
+        private void GoToLogIn()
+        {
+            navigationManager.NavigateTo("/Login");
         }
     }
 }
