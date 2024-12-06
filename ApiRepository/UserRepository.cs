@@ -77,67 +77,75 @@ namespace ApiRepository
         }
         public async Task<bool> UpdateUserAsync(User user)
         {
-            DtoUser dtoUser = new DtoUser
+            if(user != null)
             {
-                Id = user.Id,
-                Driver = user.Driver,
-                UserCredentialsId = user.UserCredentialsId,
-                UserCredentials = new DtoUserCredentials { Id = user.UserCredentials.Id, Password = user.UserCredentials.Password },
-                UserInfoId = user.UserInfoId,
-                UserInfo = new DtoUserInfo
+                DtoUser dtoUser = new DtoUser
                 {
-                    Id = user.UserInfo.Id,
-                    Address = user.UserInfo.Address,
-                    Email = user.UserInfo.Email,
-                    Name = user.UserInfo.Name,
-                    Phone_number = user.UserInfo.Phone_number
-                },
-                OrderId = user.OrderId,
-                TruckTypeId = user.TruckTypeId,
-                RatingId = user.RatingId
-            };
-            db.Users.Update(dtoUser);
-            try
-            {
-                await db.SaveChangesAsync();
+                    Id = user.Id,
+                    Driver = user.Driver,
+                    UserCredentialsId = user.UserCredentialsId,
+                    UserCredentials = new DtoUserCredentials { Id = user.UserCredentials.Id, Password = user.UserCredentials.Password },
+                    UserInfoId = user.UserInfoId,
+                    UserInfo = new DtoUserInfo
+                    {
+                        Id = user.UserInfo.Id,
+                        Address = user.UserInfo.Address,
+                        Email = user.UserInfo.Email,
+                        Name = user.UserInfo.Name,
+                        Phone_number = user.UserInfo.Phone_number
+                    },
+                    OrderId = user.OrderId,
+                    TruckTypeId = user.TruckTypeId,
+                    RatingId = user.RatingId
+                };
+                db.Users.Update(dtoUser);
+                try
+                {
+                    await db.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                return true;
             }
-            catch (Exception)
-            {
-                return false;
-            }
-            return true;
+            return false;
         }
         public async Task<bool> CreateUserAsync(User user)
         {
-            DtoUser dtoUser = new DtoUser
+            if(user != null)
             {
-                Id = user.Id,
-                Driver = user.Driver,
-                UserCredentialsId = user.UserCredentialsId,
-                UserCredentials = new DtoUserCredentials {Id = user.UserCredentials.Id, Password = user.UserCredentials.Password },
-                UserInfoId = user.UserInfoId,
-                UserInfo = new DtoUserInfo
+                DtoUser dtoUser = new DtoUser
                 {
-                    Id = user.UserInfo.Id,
-                    Address = user.UserInfo.Address,
-                    Email = user.UserInfo.Email,
-                    Name = user.UserInfo.Name,
-                    Phone_number = user.UserInfo.Phone_number
-                },
-                OrderId = user.OrderId,
-                TruckTypeId = user.TruckTypeId,
-                RatingId = user.RatingId
-            };
-            db.Users.Add(dtoUser);
-            try
-            {
-                await db.SaveChangesAsync();
+                    Id = user.Id,
+                    Driver = user.Driver,
+                    UserCredentialsId = user.UserCredentialsId,
+                    UserCredentials = new DtoUserCredentials { Id = user.UserCredentials.Id, Password = user.UserCredentials.Password },
+                    UserInfoId = user.UserInfoId,
+                    UserInfo = new DtoUserInfo
+                    {
+                        Id = user.UserInfo.Id,
+                        Address = user.UserInfo.Address,
+                        Email = user.UserInfo.Email,
+                        Name = user.UserInfo.Name,
+                        Phone_number = user.UserInfo.Phone_number
+                    },
+                    OrderId = user.OrderId,
+                    TruckTypeId = user.TruckTypeId,
+                    RatingId = user.RatingId
+                };
+                db.Users.Add(dtoUser);
+                try
+                {
+                    await db.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                return true;
             }
-            catch (Exception)
-            {
-                return false;
-            }
-            return true;
+            return false;
         }
     }
 }

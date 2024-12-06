@@ -21,20 +21,39 @@ namespace ApiRepository
         public async Task<Rating> GetRatingAsync(int ratingid)
         {
             DtoRating dtoRating = new DtoRating();
-            dtoRating = await db.Rating.FirstOrDefaultAsync(x => x.Id == ratingid);
-            Rating rating = new Rating
+            try
             {
-                Id = dtoRating.Id,
-                Ratings = dtoRating.Ratings,
-                Reason = dtoRating.Reason,
-                SenderId = dtoRating.SenderId,
-                ReceiverId = dtoRating.ReceiverId,
-            };
-            return rating;
+                dtoRating = await db.Rating.FirstOrDefaultAsync(x => x.Id == ratingid);
+            }
+            catch
+            {
+                return null;
+            }
+            if(dtoRating != null)
+            {
+                Rating rating = new Rating
+                {
+                    Id = dtoRating.Id,
+                    Ratings = dtoRating.Ratings,
+                    Reason = dtoRating.Reason,
+                    SenderId = dtoRating.SenderId,
+                    ReceiverId = dtoRating.ReceiverId,
+                };
+                return rating;
+            }
+            return null;
         }
         public async Task<List<Rating>> GetAllUsersRatingsAsync(int userId)
         {
-            List<DtoRating> dtoRatings = await db.Rating.Where(x => x.Receiver.Id == userId).Include(x => x.Sender).ThenInclude(x => x.UserInfo).ToListAsync();
+            List<DtoRating> dtoRatings = new List<DtoRating>();
+            try
+            {
+                dtoRatings = await db.Rating.Where(x => x.Receiver.Id == userId).Include(x => x.Sender).ThenInclude(x => x.UserInfo).ToListAsync();
+            }
+            catch
+            {
+                return null;
+            }
             if(dtoRatings != null)
             {
                 List<Rating> usersRatings = new List<Rating>();
@@ -65,51 +84,67 @@ namespace ApiRepository
         public async Task<List<Rating>> GetAllRatingAsync()
         {
             List<DtoRating> dtoRatings = new List<DtoRating>();
-            dtoRatings = await db.Rating.Include(x => x.Sender).ThenInclude(x => x.UserInfo).ToListAsync();
-            List<Rating> Ratings = new List<Rating>();
-            foreach (DtoRating dtoRating in dtoRatings)
+            try
             {
-                Rating rating = new Rating
-                {
-                    Id = dtoRating.Id,
-                    Ratings = dtoRating.Ratings,
-                    Reason = dtoRating.Reason,
-                    SenderId = dtoRating.SenderId,
-                    Sender = new User
-                    {
-                        Id = dtoRating.Sender.Id,
-                        UserInfo = new UserInfo
-                        {
-                            Id = dtoRating.Sender.UserInfo.Id,
-                            Name = dtoRating.Sender.UserInfo.Name,
-                        },
-                    },
-                    ReceiverId = dtoRating.ReceiverId,
-                };
-                Ratings.Add(rating);
+                dtoRatings = await db.Rating.Include(x => x.Sender).ThenInclude(x => x.UserInfo).ToListAsync();
+
             }
-            return Ratings;
+            catch
+            {
+                return null;
+            }
+            if(dtoRatings != null)
+            {
+                List<Rating> Ratings = new List<Rating>();
+                foreach (DtoRating dtoRating in dtoRatings)
+                {
+                    Rating rating = new Rating
+                    {
+                        Id = dtoRating.Id,
+                        Ratings = dtoRating.Ratings,
+                        Reason = dtoRating.Reason,
+                        SenderId = dtoRating.SenderId,
+                        Sender = new User
+                        {
+                            Id = dtoRating.Sender.Id,
+                            UserInfo = new UserInfo
+                            {
+                                Id = dtoRating.Sender.UserInfo.Id,
+                                Name = dtoRating.Sender.UserInfo.Name,
+                            },
+                        },
+                        ReceiverId = dtoRating.ReceiverId,
+                    };
+                    Ratings.Add(rating);
+                }
+                return Ratings;
+            }
+            return null;
         }
         public async Task<bool> CreateRatingAsync(Rating rating)
         {
-            DtoRating dtoRating = new DtoRating
+            if(rating != null)
             {
-                Id = rating.Id,
-                Ratings = rating.Ratings,
-                Reason = rating.Reason,
-                SenderId = rating.SenderId,
-                ReceiverId = rating.ReceiverId,
-            };
-            await db.Rating.AddAsync(dtoRating);
-            try
-            {
-                await db.SaveChangesAsync();
+                DtoRating dtoRating = new DtoRating
+                {
+                    Id = rating.Id,
+                    Ratings = rating.Ratings,
+                    Reason = rating.Reason,
+                    SenderId = rating.SenderId,
+                    ReceiverId = rating.ReceiverId,
+                };
+                await db.Rating.AddAsync(dtoRating);
+                try
+                {
+                    await db.SaveChangesAsync();
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                return true;
             }
-            catch (Exception)
-            {
-                return false;
-            }
-            return true;
+            return false;
         }
     }
 }

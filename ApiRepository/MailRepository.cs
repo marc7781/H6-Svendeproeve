@@ -15,7 +15,6 @@ namespace ApiRepository
     public class MailRepository
     {
         Database db;
-        // Email account credentials
         string senderEmail = "simontestprojekt@gmail.com";  
         string senderPassword = "Xua33ubf?";       
         string smtpHost = "smtp.gmail.com";         
