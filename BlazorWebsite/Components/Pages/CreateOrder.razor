@@ -3,6 +3,13 @@
 
 <PageTitle>Opret ordre</PageTitle>
 
+@if (createFailed)
+{
+    <div class="alert alert-danger" role="alert">
+        <p>@errorMsg</p>
+    </div>
+}
+
 <div class="container">
     <div class="header">
         <h2 class="header-text">Opret en ordre</h2>

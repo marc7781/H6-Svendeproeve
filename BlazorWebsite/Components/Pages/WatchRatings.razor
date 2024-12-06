@@ -18,10 +18,17 @@
             <a @onclick="GoToMainPage">Se dine aktive ordre her</a>
         </div>
         <div class="ratings-container">
-            @foreach (Rating rating in usersRatings) 
+            @foreach (Rating rating in usersRatings)
             {
-                <RatingComp Reason="@rating.Reason" Rating="@rating.Ratings" SenderName="@rating.Sender.UserInfo.Name"/>
+                <RatingComp Reason="@rating.Reason" Rating="@rating.Ratings" SenderName="@rating.Sender.UserInfo.Name" />
             }
+        </div>
+    }
+    else
+    {
+        <div class="header">
+            <h2 class="header-text">Du har ikke fået noget anmeldelser endnu</h2>
+            <a @onclick="GoToMainPage">Se dine aktive ordre her</a>
         </div>
     }
 </div>

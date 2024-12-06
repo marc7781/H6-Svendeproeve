@@ -46,9 +46,17 @@ a {
 }
 
 img {
+    border-radius: 50px;
     width: 30vh;
 }
+.rewrite-icon {
+    width: 5vh;
+    border-radius: 0px;
+    cursor: pointer;
+}
 .image-container {
+    display:flex;
+    justify-content: center;
     height: 30vh;
 }
 

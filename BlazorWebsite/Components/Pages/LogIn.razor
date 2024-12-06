@@ -24,7 +24,10 @@
             <input type="password" class="input" @bind-value="password" />
         </div>
         <div class="btn-container">
-            <button class="btn" @onclick="GoToSignUp">Gå til sign up</button>
+            <div>
+                <p>Har du ikke en bruger?</p>
+                <button class="btn" @onclick="GoToSignUp">Gå til sign up</button>
+            </div>
             <button class="btn" @onclick="LogUserInAsync">Log in</button>
         </div>
     </div>

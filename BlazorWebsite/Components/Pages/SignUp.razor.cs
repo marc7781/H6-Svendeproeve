@@ -28,11 +28,11 @@ namespace BlazorWebsite.Components.Pages
         }
         private bool ValidateInfo()
         {
-            if(string.IsNullOrEmpty(user.UserInfo.Name) && user.UserInfo.Name.Length < 4)
+            if(string.IsNullOrEmpty(user.UserInfo.Name) || user.UserInfo.Name.Length < 4)
             {
                 return false;
             }
-            if (string.IsNullOrEmpty(user.UserInfo.Email) && user.UserInfo.Email.Length < 5 && user.UserInfo.Email.Contains('@'))
+            if (string.IsNullOrEmpty(user.UserInfo.Email) || user.UserInfo.Email.Length < 5 || !user.UserInfo.Email.Contains('@'))
             {
                 return false;
             }
@@ -40,7 +40,7 @@ namespace BlazorWebsite.Components.Pages
             {
                 return false;
             }
-            if (string.IsNullOrEmpty(user.UserInfo.Address) && user.UserInfo.Address.Length < 4)
+            if (string.IsNullOrEmpty(user.UserInfo.Address) || user.UserInfo.Address.Length < 4)
             {
                 return false;
             }

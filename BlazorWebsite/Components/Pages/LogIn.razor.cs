@@ -39,7 +39,7 @@ namespace BlazorWebsite.Components.Pages
             if (user != null)
             {
                 await localStorageHelper.SaveAsync("userId", user.Id.ToString());
-                navigationManager.NavigateTo("/Profile");
+                navigationManager.NavigateTo("/");
                 //log user in
             }
 

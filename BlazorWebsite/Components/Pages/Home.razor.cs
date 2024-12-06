@@ -88,5 +88,9 @@ namespace BlazorWebsite.Components.Pages
         {
             navigationManager.NavigateTo("/watchratings");
         }
+        private void GoToEditUser()
+        {
+            navigationManager.NavigateTo("/editprofile");
+        }
     }
 }

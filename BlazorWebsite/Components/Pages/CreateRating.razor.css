@@ -2,7 +2,7 @@
 }
 .container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: flex-start;
     height: 100vh;
     flex-direction: column;
@@ -17,8 +17,8 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
+    min-height: 40vh;
     background-color: white;
-    height: 85vh;
     width: 100%;
     border-radius: 50px;
     margin-bottom: 3%;

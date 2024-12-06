@@ -26,9 +26,9 @@ namespace BlazorRepository
                     dtoUser = await db.GetOneUserFromIdAsync(dtoUser.Id);
                     return ConvertDtoToUser(dtoUser);
                 }
-                throw new Exception("Password don't match");
+                throw new Exception("Kodeorderne passer ikke sammen");
             }
-            throw new Exception($"Couldn't find a user with {mail} mail");
+            throw new Exception($"Kunne ikke finde en bruger med mailen: {mail}");
         }
         public async Task<User> GetUserFromIdAsync(int userId)
         {

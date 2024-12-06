@@ -13,7 +13,7 @@
     @if (user != null)
     {
         <div class="header">
-            <h2 class="header-text">Hej @user.UserInfo.Name</h2>
+            <h2 class="header-text">Hej @user.UserInfo.Name <img @onclick="GoToEditUser" src="images/RewriteIcon.png" class="rewrite-icon"/></h2>
             <a @onclick="GoToWatchRatings">Se dine anmeldelser her</a>
         </div>
         <div class="order-container">
@@ -21,13 +21,13 @@
                 <h3>Dine aktive ordrer</h3>
                 <span @onclick="GoToCreate" class="add-btn">+</span>
             </div>
-            @if (activeOrders != null)
+            @if (activeOrders != null && activeOrders.Count != 0)
             {
                 @for (int i = 0; i < activeOrders.Count; i++)
                 {
                     <div class="foreground">
                         <div class="image-container">
-                            <img src="https://plugins.shopware-staging.overdose.digital/thumbnail/d3/e3/a5/1690970711/test%20%281%29_1920x1920.png" />
+                            <img src="@activeOrders[i].ImageUrl" />
                         </div>
                         <div class="left-info-container">
                             <div class="top-container">

@@ -62,6 +62,10 @@ namespace BlazorWebsite.Components.Pages
             {
                 return false;
             }
+            if(string.IsNullOrEmpty(currentPassword) || currentPassword.Length < 7)
+            {
+                return false;
+            }
             return true;
         }
         private bool ValidateNewPasswords()

@@ -12,11 +12,13 @@ namespace BlazorWebsite.Components.Pages
 
         public Order CreatedOrder { get; set; }
         private LocalStorageHelper localStorageHelper;
-        private int ownerId {  get; set; }
+        private int ownerId { get; set; }
+        private bool createFailed { get; set; }
+        private string errorMsg { get; set; }
 
         protected override async Task OnAfterRenderAsync(bool firstRernder)
         {
-            if(firstRernder)
+            if (firstRernder)
             {
                 localStorageHelper = new LocalStorageHelper(JS);
                 try
@@ -27,7 +29,7 @@ namespace BlazorWebsite.Components.Pages
                 {
                     navigationManager.NavigateTo("/Login");
                 }
-                if(ownerId == 0)
+                if (ownerId == 0)
                 {
                     navigationManager.NavigateTo("/Login");
                 }
@@ -40,39 +42,52 @@ namespace BlazorWebsite.Components.Pages
         }
         private bool ValidateOrder()
         {
-            if(string.IsNullOrEmpty(CreatedOrder.Description) || CreatedOrder.Description.Length < 4)
+            if (string.IsNullOrEmpty(CreatedOrder.Description) || CreatedOrder.Description.Length < 4)
             {
                 return false;
             }
-            if(string.IsNullOrEmpty(CreatedOrder.Description) || CreatedOrder.Destination.Length < 4)
+            if (string.IsNullOrEmpty(CreatedOrder.Description) || CreatedOrder.Destination.Length < 4)
             {
                 return false;
             }
-            if(string.IsNullOrEmpty(CreatedOrder.Address) || CreatedOrder.Address.Length < 4)
+            if (string.IsNullOrEmpty(CreatedOrder.Address) || CreatedOrder.Address.Length < 4)
             {
                 return false;
             }
-            if(CreatedOrder.Weight <= 0)
+            if (CreatedOrder.Weight <= 0)
             {
                 return false;
             }
-            if(string.IsNullOrEmpty(CreatedOrder.Size) || CreatedOrder.Size.Count(x => x == '*') > 2 && CreatedOrder.Size.Count(x => x == '*') < 4 && CreatedOrder.Size.Length > 5)
+            if (string.IsNullOrEmpty(CreatedOrder.Size) || CreatedOrder.Size.Count(x => x == '*') > 2 && CreatedOrder.Size.Count(x => x == '*') < 4 && CreatedOrder.Size.Length > 5)
             {
                 return false;
             }
-            if(CreatedOrder.Price <= 0)
+            if (CreatedOrder.Price <= 0)
             {
                 return false;
             }
-            if(CreatedOrder.ExpirationDate < DateTime.Now)
+            if (CreatedOrder.ExpirationDate < DateTime.Now)
             {
                 return false;
             }
-            if(string.IsNullOrEmpty(CreatedOrder.ImageUrl) || CreatedOrder.ImageUrl.Length < 5)
+            if (string.IsNullOrEmpty(CreatedOrder.ImageUrl) || CreatedOrder.ImageUrl.Length < 5)
             {
                 return false;
             }
             return true;
+        }
+        private async Task ShowErrorMessageAsync(string message)
+        {
+            errorMsg = message;
+            createFailed = true;
+            StateHasChanged();
+            ErrorTimeMessageAsync();
+        }
+        private async void ErrorTimeMessageAsync()
+        {
+            await Task.Delay(5000);
+            createFailed = false;
+            StateHasChanged();
         }
         private void GoToMainPage()
         {
@@ -81,23 +96,23 @@ namespace BlazorWebsite.Components.Pages
 
         private async void SubmitOrder()
         {
-            if(ValidateOrder())
+            if (ValidateOrder())
             {
                 CreatedOrder.TruckTypeId = 1;
                 CreatedOrder.OwnerId = ownerId;
                 bool checkIfSucces = await orderRepo.CreateOrderAsync(CreatedOrder);
                 if (checkIfSucces)
                 {
-                    //order is created
+                    navigationManager.NavigateTo("/");
                 }
                 else
                 {
-                    //order couldn't be created
+                    await ShowErrorMessageAsync("Kunne ikke oprette varen på vores ende, prøv igen");
                 }
             }
             else
             {
-                //validate failed
+                await ShowErrorMessageAsync("informationen på ordren er ikke korrekt");
             }
         }
     }
