@@ -42,10 +42,10 @@ a {
     width: 100%;
     border-radius: 50px;
     margin-bottom: 3%;
+    padding-right: 40px;
 }
 
 img {
-    height: 100%;
     width: 30vh;
 }
 .image-container {
@@ -68,7 +68,6 @@ p {
     justify-content: space-between;
     align-items: flex-end;
     width: 100%;
-    margin-right: 50px;
 }
 
 .right-top-container {
@@ -119,4 +118,14 @@ p {
 .clickable-span {
     cursor: pointer;
     border-bottom: solid 2px;
+}
+
+@media only screen and (max-width: 600px) {
+    img {
+        height: 50%;
+        width: 15vh;
+    }
+    p {
+        font-size: 12px;
+    }
 }

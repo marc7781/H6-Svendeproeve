@@ -1,10 +1,13 @@
-﻿.modal-dialog {
+﻿body {
+}
+.modal-dialog {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh; /* Full viewport height to center vertically */
     margin: 0 auto; /* Ensure it's horizontally centered */
 }
+
 .modal-content {
     margin: 0 auto;
     width: 80vw;
@@ -12,36 +15,24 @@
     border-radius: 50px;
     border: 4px solid transparent;
 }
-.inspect-container {
+.delete-container {
+    width: 50vw;
+    height: 40vh;
     display: flex;
     flex-direction: column;
-    min-height: 40vh;
-    width: 80vh;
     padding: 20px;
+    justify-content: space-between;
 }
+.top-container {
+    display: flex;
+    justify-content: flex-start;
+}
+.middle-container {
 
-.top {
+}
+.bottom-container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-}
-.middle {
-    display: flex;
-    flex-direction: column;
-}
-.bottom {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-}
-.close-btn {
-    font-size: 48px;
-}
-.rating-container {
-
-}
-.ratings {
-
 }
 .btn {
     border: none;
@@ -51,22 +42,9 @@
     color: white;
     height: 50px;
 }
-
-@media only screen and (max-width: 1000px) {
-    img {
-        width: 40px;
-    }
-    .top {
-        max-width: 70vw;
-    }
-    .bottom {
-        justify-content: flex-start;
-    }
-}
-@media only screen and (max-width: 600px) {
-    .bottom {
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: flex-start;
+@media only screen and (max-width: 770px) {
+    .delete-container {
+        height: auto;
+        width: 80vw;
     }
 }

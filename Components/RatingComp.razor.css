@@ -25,3 +25,17 @@
 p {
     font-size: 20px;
 }
+@media only screen and (max-width: 770px) {
+    .foreground {
+        padding: 10px 30px 10px 30px;
+        min-height: 15vh;
+    }
+    img {
+        width: 50px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    img {
+        width: 30px;
+    }
+}

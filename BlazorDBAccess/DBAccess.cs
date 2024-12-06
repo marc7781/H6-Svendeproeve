@@ -68,6 +68,23 @@ namespace BlazorDBAccess
             }
             return null;
         }
+        public async Task<bool> DeleteOrderAsync(int orderId)
+        {
+            if (orderId != 0)
+            {
+                HttpResponseMessage response;
+                try
+                {
+                    response = await httpClient.DeleteAsync($"Order/{orderId}");
+                }
+                catch
+                {
+                    return false;
+                }
+                return response.IsSuccessStatusCode;
+            }
+            return false;
+        }
         public async Task<bool> UpdateOrderAsync(DtoOrder order)
         {
             if (order != null)

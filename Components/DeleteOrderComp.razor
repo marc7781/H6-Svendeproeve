@@ -1,0 +1,18 @@
+﻿<div class="modal Show" tabindex="-1" role="dialog" style="display: block">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="delete-container">
+                <div class="top-container">
+                    <h2>Er du sikker på at du vil slette ordren?</h2>
+                </div>
+                <div class="middle-container">
+                    <h6>Hvis du sletter ordren kan den ikke komme tilbage og vil være tabt for evigt</h6>
+                </div>
+                <div class="bottom-container">
+                    <button class="btn" @onclick="CancelDeleteEventAsync">Fortryd</button>
+                    <button class="btn" @onclick="ConfirmDeleteEventAsync">Slet ordre</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

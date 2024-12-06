@@ -4,7 +4,6 @@
     display: flex;
     justify-content: flex-end;
     align-items: flex-start;
-    height: 100vh;
     flex-direction: column;
 }
 .header {
@@ -50,4 +49,9 @@
     font-weight: bold;
     color: white;
     height: 50px;
+}
+@media only screen and (max-width: 770px) {
+    .foreground {
+        height: auto;
+    }
 }

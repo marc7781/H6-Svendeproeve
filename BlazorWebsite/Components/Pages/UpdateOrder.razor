@@ -10,15 +10,24 @@
     </div>
 }
 
+@if(deleteOrdre)
+{
+    <DeleteOrderComp CancelDeleteEvent="CancelDeleteOrder" ConfirmDeleteEvent="ConfirmedDeleteOrder"/>
+}
+
 <div class="container">
     <div class="header">
-        <h2 class="header-text">Opret en ordre</h2>
+        <h2 class="header-text">Redigere din ordre</h2>
     </div>
     <div class="foreground">
         @if (order != null)
         {
             <div class="input-container">
-                <h6 class="red-text">Giv en kort beskrivelse af hvad der skal flyttes</h6>
+                <div class="top-input">
+                    <h6 class="red-text">Giv en kort beskrivelse af hvad der skal flyttes</h6>
+                    <img @onclick="DeleteOrder" src="images/DeleteTrashcan.png"/>
+                </div>
+
                 <input type="text" class="input" @bind-value="order.Description" />
             </div>
             <div class="input-container">
@@ -51,11 +60,11 @@
             </div>
             <div class="input-container">
                 <h6 class="red-text">Specificer en type lastvogn der skal levere varen</h6>
-                <input type="text" class="input" @bind-value="order.TruckType.Trucktype" />
+                <input type="text" class="input" />
             </div>
         }
         <div class="btn-container">
-            <button class="btn">Gå tilbage</button>
+            <button class="btn" @onclick="GoToMainPage">Gå tilbage</button>
             <button class="btn" @onclick="SubmitChanges">Opret ordren</button>
         </div>
     </div>

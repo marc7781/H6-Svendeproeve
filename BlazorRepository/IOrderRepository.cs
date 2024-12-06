@@ -9,5 +9,6 @@ namespace BlazorRepository
         Task<List<Order>> GetOrdersFromOwnerIdAsync(int ownerId);
         Task<Order> GetOrderFromIdAsync(int orderId);
         Task<bool> UpdateOrderAsync(Order order);
+        Task<bool> DeleteOrderAsync(int orderId);
     }
 }

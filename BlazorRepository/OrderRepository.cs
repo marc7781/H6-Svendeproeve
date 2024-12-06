@@ -59,7 +59,14 @@ namespace BlazorRepository
             }
             return false;
         }
-
+        public async Task<bool> DeleteOrderAsync(int orderId)
+        {
+            if(orderId != 0)
+            {
+                return await db.DeleteOrderAsync(orderId);
+            }
+            return false;
+        }
 
         #region ConvertModels
 

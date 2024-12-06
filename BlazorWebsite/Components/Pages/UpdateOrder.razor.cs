@@ -13,6 +13,7 @@ namespace BlazorWebsite.Components.Pages
         [Parameter]
         public int Id { get; set; }
         private bool updateFailed { get; set; }
+        private bool deleteOrdre { get; set; }
         private string errorMsg { get; set; }
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
@@ -66,6 +67,21 @@ namespace BlazorWebsite.Components.Pages
             }
             return true;
         }
+        private void DeleteOrder()
+        {
+            deleteOrdre = true;
+            StateHasChanged();
+        }
+        private void CancelDeleteOrder()
+        {
+            deleteOrdre = false;
+            StateHasChanged();
+        }
+        private async Task ConfirmedDeleteOrder()
+        {
+            await orderRepo.DeleteOrderAsync(order.Id);
+        }
+
         private async void SubmitChanges()
         {
             if(ValidateOrder())
@@ -96,6 +112,10 @@ namespace BlazorWebsite.Components.Pages
             await Task.Delay(5000);
             updateFailed = false;
             StateHasChanged();
+        }
+        private void GoToMainPage()
+        {
+            navigationManager.NavigateTo("/");
         }
     }
 }

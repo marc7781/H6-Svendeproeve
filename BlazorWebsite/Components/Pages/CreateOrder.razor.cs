@@ -74,6 +74,11 @@ namespace BlazorWebsite.Components.Pages
             }
             return true;
         }
+        private void GoToMainPage()
+        {
+            navigationManager.NavigateTo("/");
+        }
+
         private async void SubmitOrder()
         {
             if(ValidateOrder())
